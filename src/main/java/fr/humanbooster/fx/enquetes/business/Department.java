@@ -1,6 +1,6 @@
 package fr.humanbooster.fx.enquetes.business;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,7 +24,7 @@ public class Department {
 	private String name;
 	
 	@OneToMany(mappedBy="department", fetch=FetchType.EAGER)
-	private List<Criteria> lsCriteria;
+	private Set<Criteria> lsCriteria;
 	
 	public Department(String number, String name) {
 		this.number = number;
@@ -58,5 +58,12 @@ public class Department {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	@Override
+	public String toString() {
+		return "Department [id=" + id + ", number=" + number + ", name=" + name + ", lsCriteria=" + lsCriteria + "]";
+	}
+	
+	
 	
 }
