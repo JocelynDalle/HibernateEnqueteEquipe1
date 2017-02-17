@@ -1,5 +1,8 @@
 package fr.humanbooster.fx.enquetes.business;
 
+import javax.persistence.Entity;
+
+@Entity
 public class SurveyPhone extends Survey {
 	
 	private String script;
