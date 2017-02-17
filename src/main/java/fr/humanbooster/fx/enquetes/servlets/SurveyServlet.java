@@ -7,27 +7,45 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.humanbooster.fx.enquetes.business.Survey;
+import fr.humanbooster.fx.enquetes.business.SurveyInternet;
+import fr.humanbooster.fx.enquetes.business.SurveyPhone;
+
 /**
  * Servlet implementation class SurveyServlet
  */
-@WebServlet("/SurveyServlet")
 public class SurveyServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+
+	private Survey surveyPhone;
+	private Survey surveyInternet;
+	
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -942489127115599803L;
+
+	/**
      * @see HttpServlet#HttpServlet()
      */
     public SurveyServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        // initialisation SurveyService A FAIRE
+        surveyPhone = new SurveyPhone();
+        surveyInternet = new SurveyInternet();
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int type = Integer.parseInt(request.getParameter("type"));
+		if (request.getParameter("id") == null) {
+			int idServlet = Integer.parseInt(request.getParameter("id"));
+		} else {
+			
+		}
+		
+//		
 	}
 
 	/**
