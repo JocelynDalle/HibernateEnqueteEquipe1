@@ -12,51 +12,51 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import fr.humanbooster.fx.enquetes.business.Survey;
-import fr.humanbooster.fx.enquetes.dao.SurveyDao;
+import fr.humanbooster.fx.enquetes.business.Department;
+import fr.humanbooster.fx.enquetes.dao.DepartmentDao;
 
-public class SurveyDaoImpl implements SurveyDao {
+public class DepartmentDaoImpl implements DepartmentDao {
 
 	private Session session;
 	private Transaction transaction;
 
 	// Create
 	@Override
-	public Survey createSurvey(Survey survey) {
-		session.save(survey);
-		return survey;
+	public Department createDepartment(Department department) {
+		session.save(department);
+		return department;
 	}
 
 	// Update
 	@Override
-	public Survey updateSurvey(Survey survey) {
-		session.saveOrUpdate(survey);
-		return survey;
+	public Department updateDepartment(Department department) {
+		session.saveOrUpdate(department);
+		return department;
 	}
 
 	// Delete
 	@Override
-	public boolean deleteSurvey(int idSurvey) {
-		Survey survey = this.findById(idSurvey);
-		if (survey == null)
+	public boolean deleteDepartment(int idDepartment) {
+		Department department = this.findById(idDepartment);
+		if (department == null)
 			return false;
-		session.delete(survey);
+		session.delete(department);
 		return true;
 	}
 
 	@Override
-	public Survey findById(int idSurvey) {
+	public Department findById(int idDepartment) {
 
-		return session.byId(Survey.class).load(idSurvey);
+		return session.byId(Department.class).load(idDepartment);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public Set<Survey> findAll() {
-		List<Survey> lsSurvey = session.createQuery("from Survey").getResultList();
-		Set<Survey> setSurvey = new TreeSet<Survey>();
-		setSurvey.addAll(lsSurvey);
-		return setSurvey;
+	public Set<Department> findAll() {
+		List<Department> lsDepartment = session.createQuery("from Department").getResultList();
+		Set<Department> setDepartment = new TreeSet<Department>();
+		setDepartment.addAll(lsDepartment);
+		return setDepartment;
 
 	}
 
@@ -102,3 +102,4 @@ public class SurveyDaoImpl implements SurveyDao {
 	}
 
 }
+

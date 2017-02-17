@@ -21,7 +21,5 @@ public class SurveyInternet extends Survey {
 	}
 
 
-	
-	
 
 }
