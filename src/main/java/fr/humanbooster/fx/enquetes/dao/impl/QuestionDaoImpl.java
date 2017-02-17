@@ -12,51 +12,51 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import fr.humanbooster.fx.enquetes.business.Survey;
-import fr.humanbooster.fx.enquetes.dao.SurveyDao;
+import fr.humanbooster.fx.enquetes.business.Question;
+import fr.humanbooster.fx.enquetes.dao.QuestionDao;
 
-public class SurveyDaoImpl implements SurveyDao {
+public class QuestionDaoImpl implements QuestionDao {
 
 	private Session session;
 	private Transaction transaction;
 
 	// Create
 	@Override
-	public Survey createSurvey(Survey survey) {
-		session.save(survey);
-		return survey;
+	public Question createQuestion(Question question) {
+		session.save(question);
+		return question;
 	}
 
 	// Update
 	@Override
-	public Survey updateSurvey(Survey survey) {
-		session.saveOrUpdate(survey);
-		return survey;
+	public Question updateQuestion(Question question) {
+		session.saveOrUpdate(question);
+		return question;
 	}
 
 	// Delete
 	@Override
-	public boolean deleteSurvey(int idSurvey) {
-		Survey survey = this.findById(idSurvey);
-		if (survey == null)
+	public boolean deleteQuestion(int idQuestion) {
+		Question question = this.findById(idQuestion);
+		if (question == null)
 			return false;
-		session.delete(survey);
+		session.delete(question);
 		return true;
 	}
 
 	@Override
-	public Survey findById(int idSurvey) {
+	public Question findById(int idQuestion) {
 
-		return session.byId(Survey.class).load(idSurvey);
+		return session.byId(Question.class).load(idQuestion);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public Set<Survey> findAll() {
-		List<Survey> lsSurvey = session.createQuery("from Survey").getResultList();
-		Set<Survey> setSurvey = new TreeSet<Survey>();
-		setSurvey.addAll(lsSurvey);
-		return setSurvey;
+	public Set<Question> findAll() {
+		List<Question> lsQuestion = session.createQuery("from Question").getResultList();
+		Set<Question> setQuestion = new TreeSet<Question>();
+		setQuestion.addAll(lsQuestion);
+		return setQuestion;
 
 	}
 

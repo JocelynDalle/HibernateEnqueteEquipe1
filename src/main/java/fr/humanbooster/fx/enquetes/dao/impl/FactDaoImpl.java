@@ -12,51 +12,52 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import fr.humanbooster.fx.enquetes.business.Survey;
-import fr.humanbooster.fx.enquetes.dao.SurveyDao;
+import fr.humanbooster.fx.enquetes.business.Fact;
+import fr.humanbooster.fx.enquetes.dao.FactDao;
 
-public class SurveyDaoImpl implements SurveyDao {
-
+public class FactDaoImpl implements FactDao {
+	
+	
 	private Session session;
 	private Transaction transaction;
 
 	// Create
 	@Override
-	public Survey createSurvey(Survey survey) {
-		session.save(survey);
-		return survey;
+	public Fact createFact(Fact fact) {
+		session.save(fact);
+		return fact;
 	}
 
 	// Update
 	@Override
-	public Survey updateSurvey(Survey survey) {
-		session.saveOrUpdate(survey);
-		return survey;
+	public Fact updateFact(Fact fact) {
+		session.saveOrUpdate(fact);
+		return fact;
 	}
 
 	// Delete
 	@Override
-	public boolean deleteSurvey(int idSurvey) {
-		Survey survey = this.findById(idSurvey);
-		if (survey == null)
+	public boolean deleteFact(int idFact) {
+		Fact fact = this.findById(idFact);
+		if (fact == null)
 			return false;
-		session.delete(survey);
+		session.delete(fact);
 		return true;
 	}
 
 	@Override
-	public Survey findById(int idSurvey) {
+	public Fact findById(int idFact) {
 
-		return session.byId(Survey.class).load(idSurvey);
+		return session.byId(Fact.class).load(idFact);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public Set<Survey> findAll() {
-		List<Survey> lsSurvey = session.createQuery("from Survey").getResultList();
-		Set<Survey> setSurvey = new TreeSet<Survey>();
-		setSurvey.addAll(lsSurvey);
-		return setSurvey;
+	public Set<Fact> findAll() {
+		List<Fact> lsFact = session.createQuery("from Fact").getResultList();
+		Set<Fact> setFact = new TreeSet<Fact>();
+		setFact.addAll(lsFact);
+		return setFact;
 
 	}
 
@@ -102,3 +103,4 @@ public class SurveyDaoImpl implements SurveyDao {
 	}
 
 }
+
