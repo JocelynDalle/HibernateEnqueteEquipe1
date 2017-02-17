@@ -1,4 +1,4 @@
-package fr.humanbooster.fx.enquetes.dao;
+package fr.humanbooster.fx.enquetes.dao.impl;
 
 import java.util.List;
 import java.util.Set;
@@ -13,7 +13,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import fr.humanbooster.fx.enquetes.business.PartnerSite;
-import fr.humanbooster.fx.enquetes.dao.impl.PartnerSiteDao;
+import fr.humanbooster.fx.enquetes.dao.PartnerSiteDao;
 
 public class PartnerSiteDaoImpl implements PartnerSiteDao {
 
