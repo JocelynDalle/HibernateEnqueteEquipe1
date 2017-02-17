@@ -47,4 +47,22 @@ public class SurveyServiceImpl implements SurveyService{
 		return survey;
 	}
 
+
+	@Override
+	public SurveyInternet createSurveyInternet(SurveyInternet surveyInternet) {
+		sDao.openCurrentSessionWithTransaction();
+		SurveyInternet _surveyInternet = (SurveyInternet) sDao.createSurvey(surveyInternet);
+		sDao.closeCurrentSessionwithTransaction();
+		return _surveyInternet;
+	}
+
+
+	@Override
+	public SurveyPhone createSurveyPhone(SurveyPhone surveyPhone) {
+		sDao.openCurrentSessionWithTransaction();
+		SurveyPhone _surveyPhone = (SurveyPhone) sDao.createSurvey(surveyPhone);
+		sDao.closeCurrentSessionwithTransaction();
+		return _surveyPhone;
+	}
+
 }

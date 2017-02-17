@@ -15,4 +15,8 @@ public interface SurveyService {
 	public Set<Survey> findAllSurvey();
 	
 	public Survey findById(int idSurvey);
+	
+	public SurveyInternet createSurveyInternet(SurveyInternet surveyInternet);
+	
+	public SurveyPhone createSurveyPhone(SurveyPhone surveyPhone);
 }
