@@ -1,11 +1,17 @@
 package fr.humanbooster.fx.enquetes.business;
 
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.Length;
 
+@Entity
 public class Department {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -16,6 +22,9 @@ public class Department {
 	
 	@Length(max=50)
 	private String name;
+	
+	@OneToMany(mappedBy="department", fetch=FetchType.EAGER)
+	private List<Criteria> lsCriteria;
 	
 	public Department(String number, String name) {
 		this.number = number;
