@@ -24,8 +24,8 @@ public class SurveyServlet extends HttpServlet {
 
 	private SurveyService surveyService;
 //	private PartnerSiteService partnerSiteService;
-	private Survey surveyPhone;
-	private Survey surveyInternet;
+	private Survey survey;
+	//private Survey surveyInternet;
 
 	/**
      * @see HttpServlet#HttpServlet()
@@ -33,8 +33,8 @@ public class SurveyServlet extends HttpServlet {
     public SurveyServlet() {
         super();
         surveyService = new SurveyServiceImpl();
-        surveyPhone = new SurveyPhone();
-        surveyInternet = new SurveyInternet();
+        //surveyPhone = new SurveyPhone();
+        //surveyInternet = new SurveyInternet();
         
 //        partnerSiteService = new PartnerSiteServiceImpl();
     }
@@ -54,8 +54,8 @@ public class SurveyServlet extends HttpServlet {
 		System.out.println("typeSurvey " + request.getParameter("typeSurvey"));	// A VIRER
 		System.out.println("idSurvey " + request.getParameter("idSurvey"));
 		
-		surveyPhone = surveyService.findById(1);
-		System.out.println("test survey findById : " + surveyPhone);
+//		surveyPhone = surveyService.findById(1);
+//		System.out.println("test survey findById : " + surveyPhone);
 		
 		
 		typeSurvey = request.getParameter("typeSurvey");
@@ -82,10 +82,10 @@ public class SurveyServlet extends HttpServlet {
 				// on récupère l'enquête
 				switch (typeSurvey) {
 				case "surveyPhone":
-					surveyPhone = surveyService.findById(idSurvey);
+					survey = surveyService.findById(idSurvey);
 					break;
 				case "surveyInternet":
-					surveyInternet = surveyService.findById(idSurvey);
+					survey = surveyService.findById(idSurvey);
 					break;
 				default:	
 					// on n'a pas un type d'enquête cohérent fourni dans l'url
@@ -109,12 +109,12 @@ public class SurveyServlet extends HttpServlet {
 		switch (typeSurvey) {
 		case "surveyPhone": 			
 			request.setAttribute("typeSurvey", "surveyPhone");
-			request.setAttribute("survey", surveyPhone);
+			request.setAttribute("survey", survey);
 			break;
 			
 		case "surveyInternet":
 			request.setAttribute("typeSurvey", "surveyInternet");
-			request.setAttribute("survey", surveyInternet);
+			request.setAttribute("survey", survey);
 			break;	
 		}
 		
