@@ -20,6 +20,9 @@ public class Criteria {
 	
 	@ManyToOne
 	private Fact fact;
+	
+	@ManyToOne
+	private Survey survey;
 
 	public int getId() {
 		return id;
@@ -53,9 +56,18 @@ public class Criteria {
 		this.fact = fact;
 	}
 
+	public Survey getSurvey() {
+		return survey;
+	}
+
+	public void setSurvey(Survey survey) {
+		this.survey = survey;
+	}
+
 	@Override
 	public String toString() {
-		return "Criteria [id=" + id + ", quota=" + quota + ", department=" + department + ", fact=" + fact + "]";
+		return "Criteria [id=" + id + ", quota=" + quota + ", department=" + department + ", fact=" + fact + ", survey="
+				+ survey + "]";
 	}
 	
 }
