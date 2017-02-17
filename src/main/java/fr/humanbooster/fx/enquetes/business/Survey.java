@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,10 +24,11 @@ public abstract class Survey implements Comparable<Survey> {
 	private String name;
 	private float price;
 	private Date date;
-	@OneToMany(mappedBy = "survey")
+	@OneToMany(mappedBy = "survey", fetch=FetchType.EAGER)
 	private Set<Criteria> setCriteria;
 
-	
+	@OneToMany(mappedBy="survey", fetch=FetchType.EAGER)
+	private Set<Question> lsQuestion;
 	
 	public int getId() {
 		return id;
@@ -66,6 +68,14 @@ public abstract class Survey implements Comparable<Survey> {
 
 	public void setSetCriteria(Set<Criteria> setCriteria) {
 		this.setCriteria = setCriteria;
+	}
+
+	public Set<Question> getLsQuestion() {
+		return lsQuestion;
+	}
+
+	public void setLsQuestion(Set<Question> lsQuestion) {
+		this.lsQuestion = lsQuestion;
 	}
 
 	@Override
