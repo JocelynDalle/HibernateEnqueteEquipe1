@@ -40,6 +40,10 @@ public class QuestionServiceImpl implements QuestionService{
 		question.setWording(wording);
 		question.setSurvey(survey);
 		
+		qDao.openCurrentSessionWithTransaction();
+		qDao.createQuestion(question);
+		qDao.closeCurrentSessionwithTransaction();
+		
 		return question;
 	}
 
