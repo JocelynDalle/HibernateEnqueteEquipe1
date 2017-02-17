@@ -1,9 +1,5 @@
 Manifest-Version: 1.0
 Built-By: Robin
-<<<<<<< HEAD
-Build-Jdk: 1.8.0_112
-=======
 Build-Jdk: 1.8.0_111
->>>>>>> e849652508475e3dd31fa47a61e759a1b57ae0b0
 Created-By: Maven Integration for Eclipse
 
