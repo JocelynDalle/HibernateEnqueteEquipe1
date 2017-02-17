@@ -18,14 +18,14 @@
 		<property name="hbm2ddl.auto">update</property>
 		<property name="hibernate.current_session_context_class">thread</property>
 
-		<mapping class="fr.humanbooster.fx.cadeaux.business.Criteria"></mapping>
-		<mapping class="fr.humanbooster.fx.cadeaux.business.Departement"></mapping>
-		<mapping class="fr.humanbooster.fx.cadeaux.business.Fact"></mapping>
-		<mapping class="fr.humanbooster.fx.cadeaux.business.PartnerSite"></mapping>
-		<mapping class="fr.humanbooster.fx.cadeaux.business.Question"></mapping>
-		<mapping class="fr.humanbooster.fx.cadeaux.business.Survey"></mapping>
-		<mapping class="fr.humanbooster.fx.cadeaux.business.SurveyPhone"></mapping>
-		<mapping class="fr.humanbooster.fx.cadeaux.business.SurveyInternet"></mapping>
+		<mapping class="fr.humanbooster.fx.enquetes.business.Criteria"></mapping>
+		<mapping class="fr.humanbooster.fx.enquetes.business.Department"></mapping>
+		<mapping class="fr.humanbooster.fx.enquetes.business.Fact"></mapping>
+		<mapping class="fr.humanbooster.fx.enquetes.business.PartnerSite"></mapping>
+		<mapping class="fr.humanbooster.fx.enquetes.business.Question"></mapping>
+		<mapping class="fr.humanbooster.fx.enquetesx.business.Survey"></mapping>
+		<mapping class="fr.humanbooster.fx.enquetes.business.SurveyPhone"></mapping>
+		<mapping class="fr.humanbooster.fx.enquetes.business.SurveyInternet"></mapping>
 
 	</session-factory>
 
