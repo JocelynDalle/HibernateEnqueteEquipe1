@@ -42,15 +42,15 @@
 							</div>
 							<br>
 							<a
-								href="SurveyServlet?typeAction=update&typeSurvey=surveyPhone&idSurvey=${survey.id }"></a>
-							<button class="btn btn-success">Modifier enquête</button>
+								href="SurveyServlet?typeAction=update&typeSurvey=surveyPhone&idSurvey=${survey.id}">
+							<button class="btn btn-success">Modifier enquête</button></a>
 							<br>
 						</c:when>
 						<c:otherwise>
 			Enquête internet
 			<a
-								href="SurveyServlet?typeAction=update&typeSurvey=surveyInternet&idSurvey=${survey.id }"></a>
-							<button class="btn btn-success">Modifier enquête</button>
+								href="SurveyServlet?typeAction=update&typeSurvey=surveyInternet&idSurvey=${survey.id }">
+							<button class="btn btn-success">Modifier enquête</button></a>
 						</c:otherwise>
 					</c:choose>
 				</div>
