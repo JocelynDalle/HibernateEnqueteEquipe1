@@ -12,51 +12,51 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import fr.humanbooster.fx.enquetes.business.Survey;
-import fr.humanbooster.fx.enquetes.dao.SurveyDao;
+import fr.humanbooster.fx.enquetes.business.Criteria;
+import fr.humanbooster.fx.enquetes.dao.CriteriaDao;
 
-public class SurveyDaoImpl implements SurveyDao {
+public class CriteriaDaoImpl implements CriteriaDao {
 
 	private Session session;
 	private Transaction transaction;
 
 	// Create
 	@Override
-	public Survey createSurvey(Survey survey) {
-		session.save(survey);
-		return survey;
+	public Criteria createCriteria(Criteria criteria) {
+		session.save(criteria);
+		return criteria;
 	}
 
 	// Update
 	@Override
-	public Survey updateSurvey(Survey survey) {
-		session.saveOrUpdate(survey);
-		return survey;
+	public Criteria updateCriteria(Criteria criteria) {
+		session.saveOrUpdate(criteria);
+		return criteria;
 	}
 
 	// Delete
 	@Override
-	public boolean deleteSurvey(int idSurvey) {
-		Survey survey = this.findById(idSurvey);
-		if (survey == null)
+	public boolean deleteCriteria(int idCriteria) {
+		Criteria criteria = this.findById(idCriteria);
+		if (criteria == null)
 			return false;
-		session.delete(survey);
+		session.delete(criteria);
 		return true;
 	}
 
 	@Override
-	public Survey findById(int idSurvey) {
+	public Criteria findById(int idCriteria) {
 
-		return session.byId(Survey.class).load(idSurvey);
+		return session.byId(Criteria.class).load(idCriteria);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public Set<Survey> findAll() {
-		List<Survey> lsSurvey = session.createQuery("from Survey").getResultList();
-		Set<Survey> setSurvey = new TreeSet<Survey>();
-		setSurvey.addAll(lsSurvey);
-		return setSurvey;
+	public Set<Criteria> findAll() {
+		List<Criteria> lsCriteria = session.createQuery("from Criteria").getResultList();
+		Set<Criteria> setCriteria = new TreeSet<Criteria>();
+		setCriteria.addAll(lsCriteria);
+		return setCriteria;
 
 	}
 
@@ -102,3 +102,4 @@ public class SurveyDaoImpl implements SurveyDao {
 	}
 
 }
+
