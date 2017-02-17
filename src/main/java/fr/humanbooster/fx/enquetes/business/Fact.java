@@ -32,6 +32,9 @@ public class Fact {
 	public void setWording(String wording) {
 		this.wording = wording;
 	}
-	
+	@Override
+	public String toString() {
+		return "Fact [id=" + id + ", wording=" + wording + ", lsCriteria=" + lsCriteria + "]";
+	}
 	
 }
