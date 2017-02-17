@@ -22,7 +22,7 @@
 	<form action="QuestionAddServlet" method="post">
 	<input name="idSurvey" type="hidden" value="${survey.id}">
 		<label>Libellé de la question</label> <br>
-		<textarea class="form-control" rows="3" value="wording">Votre Question ici</textarea>
+		<textarea class="form-control" rows="3" name="wording">Votre Question ici</textarea>
 		<button type="submit">Ajouter</button>
 
 	</form>
