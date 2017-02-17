@@ -20,6 +20,11 @@ public class SurveyInternet extends Survey {
 		this.lsPartnerSite = lsPartnerSite;
 	}
 
+	@Override
+	public int compareTo(Survey o) {
+		return this.getId() > o.getId() ? 1 : -1;
+	}
+
 
 
 }

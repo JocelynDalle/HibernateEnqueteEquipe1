@@ -20,7 +20,10 @@ public class SurveyPhone extends Survey {
 	public String toString() {
 		return "SurveyPhone [script=" + script + "]";
 	}
-	
-	
 
+	@Override
+	public int compareTo(Survey o) {
+		return this.getId() > o.getId() ? 1 : -1;
+	}
+	
 }
