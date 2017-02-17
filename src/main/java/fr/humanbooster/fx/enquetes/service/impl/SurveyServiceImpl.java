@@ -1,10 +1,7 @@
 package fr.humanbooster.fx.enquetes.service.impl;
 
-import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
-import fr.humanbooster.fx.enquetes.business.Question;
 import fr.humanbooster.fx.enquetes.business.Survey;
 import fr.humanbooster.fx.enquetes.dao.SurveyDao;
 import fr.humanbooster.fx.enquetes.dao.impl.SurveyDaoImpl;
@@ -22,16 +19,13 @@ public class SurveyServiceImpl implements SurveyService{
 		return s;
 	}
 
-	@Override
-	public Question addQuestionToSurvey(Question question, Survey survey) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
-	public Boolean deleteSurvey(Survey survey) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean deleteSurvey(int idSurvey) {
+		sDao.openCurrentSessionWithTransaction();
+		Boolean result = sDao.deleteSurvey(idSurvey);
+		sDao.closeCurrentSessionwithTransaction();
+		return result;
 	}
 
 	@Override
@@ -40,6 +34,15 @@ public class SurveyServiceImpl implements SurveyService{
 		Set<Survey> s = sDao.findAll();
 		sDao.closeCurrentSessionwithTransaction();
 		return s;
+	}
+
+
+	@Override
+	public Survey findById(int idSurvey) {
+		sDao.openCurrentSessionWithTransaction();
+		Survey survey = sDao.findById(idSurvey);
+		sDao.closeCurrentSessionwithTransaction();
+		return survey;
 	}
 
 }

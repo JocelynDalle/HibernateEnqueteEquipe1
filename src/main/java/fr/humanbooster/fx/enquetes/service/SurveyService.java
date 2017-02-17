@@ -1,18 +1,16 @@
 package fr.humanbooster.fx.enquetes.service;
 
-import java.util.List;
 import java.util.Set;
 
-import fr.humanbooster.fx.enquetes.business.Question;
 import fr.humanbooster.fx.enquetes.business.Survey;
 
 public interface SurveyService {
 
 	public Survey modifySurvey(Survey survey);
 	
-	public Question addQuestionToSurvey(Question question, Survey survey);
-	
-	public Boolean deleteSurvey(Survey survey);
+	public Boolean deleteSurvey(int idSurvey);
 	
 	public Set<Survey> findAllSurvey();
+	
+	public Survey findById(int idSurvey);
 }
