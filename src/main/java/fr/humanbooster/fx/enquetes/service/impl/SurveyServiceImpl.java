@@ -3,6 +3,8 @@ package fr.humanbooster.fx.enquetes.service.impl;
 import java.util.Set;
 
 import fr.humanbooster.fx.enquetes.business.Survey;
+import fr.humanbooster.fx.enquetes.business.SurveyInternet;
+import fr.humanbooster.fx.enquetes.business.SurveyPhone;
 import fr.humanbooster.fx.enquetes.dao.SurveyDao;
 import fr.humanbooster.fx.enquetes.dao.impl.SurveyDaoImpl;
 import fr.humanbooster.fx.enquetes.service.SurveyService;
