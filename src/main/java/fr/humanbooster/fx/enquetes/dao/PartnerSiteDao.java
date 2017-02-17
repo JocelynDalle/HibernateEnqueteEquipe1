@@ -1,4 +1,4 @@
-package fr.humanbooster.fx.enquetes.dao.impl;
+package fr.humanbooster.fx.enquetes.dao;
 
 import java.util.Set;
 
