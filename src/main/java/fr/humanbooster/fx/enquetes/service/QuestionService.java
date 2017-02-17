@@ -7,7 +7,7 @@ public interface QuestionService {
 	
 	public Question modifyQuestion(Question question);
 	
-	public Boolean deleteQuestion(int idQuestion);
+	public Boolean deleteQuestion(String idQuestion);
 	
-	public Question addQuestionToSurvey(String wording, int idSurvey);
+	public Question addQuestionToSurvey(String wording, String idSurvey);
 }
