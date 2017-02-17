@@ -31,10 +31,14 @@
 			Enquête téléphonique
 			<br>
 							<div class="list-group">
-							<a href="#" class="list-group-item disabled"> Liste des questions </a>
-							<c:forEach var="question" items="${survey.lsQuestion }">
-							<a href="QuestionUpdateServlet?idQuestion=${question.id}" class="list-group-item">${question.wording}</a>
-							</c:forEach>
+								<a href="#" class="list-group-item disabled"> Liste des
+									questions <a href="QuestionAddServlet?idSurvey=${survey.id}"><Buttton
+											class="btn btn-primary">Ajouter une question</Buttton></a>
+								</a>
+								<c:forEach var="question" items="${survey.lsQuestion}">
+									<a href="QuestionUpdateServlet?idQuestion=${question.id}"
+										class="list-group-item">${question.wording} </a>
+								</c:forEach>
 							</div>
 							<br>
 							<a
