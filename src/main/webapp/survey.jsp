@@ -31,7 +31,7 @@
 					<select>
 						<c:forEach items="${partnerSites}" var="partnerSite">
 							<option>heho</option>
-							<option value="${partnerSite.idV}">${partnerSite.name}</option>
+							<option value="${partnerSite.id}">${partnerSite.name}</option>
 						</c:forEach>					
 					</select>
 				</label>
