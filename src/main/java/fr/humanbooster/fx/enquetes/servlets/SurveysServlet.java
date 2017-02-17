@@ -13,6 +13,7 @@ import fr.humanbooster.fx.enquetes.business.Question;
 import fr.humanbooster.fx.enquetes.business.Survey;
 import fr.humanbooster.fx.enquetes.service.QuestionService;
 import fr.humanbooster.fx.enquetes.service.SurveyService;
+import fr.humanbooster.fx.enquetes.service.impl.QuestionServiceImpl;
 import fr.humanbooster.fx.enquetes.service.impl.SurveyServiceImpl;
 
 /**

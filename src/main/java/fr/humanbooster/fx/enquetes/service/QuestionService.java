@@ -9,5 +9,5 @@ public interface QuestionService {
 	
 	public Boolean deleteQuestion(int idQuestion);
 	
-	public Question addQuestionToSurvey(Question question, Survey survey);
+	public Question addQuestionToSurvey(String wording, int idSurvey);
 }
