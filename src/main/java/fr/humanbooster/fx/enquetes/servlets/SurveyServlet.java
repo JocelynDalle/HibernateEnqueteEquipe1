@@ -44,26 +44,16 @@ public class SurveyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("heho !");
 		
 		String typeSurvey = "";	// type de l'enquête :    "surveyPhone"  | "surveyInternet"
 		String typeAction = "";	// type de l'action :	"create" | "update"
-		int idSurvey = -1;
-		
-		System.out.println("typeAction " + request.getParameter("typeAction"));	// A VIRER
-		System.out.println("typeAction " + request.getParameter("typeAction"));	// A VIRER
-		System.out.println("typeSurvey " + request.getParameter("typeSurvey"));	// A VIRER
-		System.out.println("typeSurvey " + request.getParameter("typeSurvey"));	// A VIRER
-		System.out.println("idSurvey " + request.getParameter("idSurvey"));
-		
-//		surveyPhone = surveyService.findById(1);
-//		System.out.println("test survey findById : " + surveyPhone);
-		
+		int idSurvey = -1;		
 		
 		typeSurvey = request.getParameter("typeSurvey");
 		typeAction = request.getParameter("typeAction");
 		
-		// suivant si on se trouve dans le cas de :
+		// suivant si on se trouve dans le cas de création d'une nouvelle enquête
+		// ou de modification d'une enquête existante
 		switch (typeAction) {
 		// création d'une nouvelle enquête
 		case "create":
@@ -109,20 +99,18 @@ public class SurveyServlet extends HttpServlet {
 			break;
 		}
 
-		// on passe les bons attributs (survey et typeSurvey) à la vue 
-		switch (typeSurvey) {
-		case "surveyPhone": 			
-			request.setAttribute("typeSurvey", "surveyPhone");
+		// si typeSurvey n'est ni "surveyPhone", ni "surveyInternet"
+		// ce n'est pas normal
+		if (!typeSurvey.equals("surveyPhone") && !typeSurvey.equals("surveyInternet")) {
+			// cas à traiter
+		} else {
+			// sinon, si typeSurvey a une valeur cohérente
+			// on passe les bons attributs (survey et typeSurvey) à la vue 
+			request.setAttribute("typeSurvey", typeSurvey);
 			request.setAttribute("survey", survey);
-			break;
 			
-		case "surveyInternet":
-			request.setAttribute("typeSurvey", "surveyInternet");
-			request.setAttribute("survey", survey);
-			break;	
+			request.getRequestDispatcher("survey.jsp").forward(request, response);			
 		}
-		
-		request.getRequestDispatcher("survey.jsp").forward(request, response);
 			
 	}
 
@@ -134,6 +122,7 @@ public class SurveyServlet extends HttpServlet {
 		System.out.println("create " + create);
 		boolean update = request.getParameter("update") != null;
 		System.out.println("update :" + update);
+		System.out.println("id :" + request.getParameter("id"));
 //		System.out.println("type d'enquête : " + typeSurvey);
 //		String typeAction = (String) request.getAttribute("typeAction");
 //		System.out.println("type d'action : " + typeAction);

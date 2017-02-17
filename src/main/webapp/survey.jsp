@@ -11,7 +11,7 @@
 	<body>
 		<h1>Enquête</h1>
 		<form method="POST" action="SurveyServlet">
-			<input type=hidden name="id" value="${survey}">
+			<input type=hidden name="id" value="${survey.id}">
 			<label>Nom  :
 				<input type="text" name="name" placeholder="Entrez le nom de l'enquête" value="${survey.name}" required>
 			</label><br>
