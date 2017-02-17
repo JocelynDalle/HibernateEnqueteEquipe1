@@ -20,6 +20,9 @@ public class Criteria {
 	
 	@ManyToOne
 	private Fact fact;
+	
+	@ManyToOne
+	private Survey survey;
 
 	public int getId() {
 		return id;
@@ -51,6 +54,14 @@ public class Criteria {
 
 	public void setFact(Fact fact) {
 		this.fact = fact;
+	}
+
+	public Survey getSurvey() {
+		return survey;
+	}
+
+	public void setSurvey(Survey survey) {
+		this.survey = survey;
 	}
 
 	@Override
