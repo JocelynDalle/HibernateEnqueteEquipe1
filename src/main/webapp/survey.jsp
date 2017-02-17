@@ -36,11 +36,12 @@
 					</select>
 				</label>
 			</c:if>
-			<c:if test="${typeAction eq 'create'} }">
+			<c:if test="${typeAction eq 'create'}">
+				<input type="submit" value="Ajouter l'enquête">
 			</c:if>
-			
-			<input type="submit" value="Ajouter l'enquête">
-			<input type="submit" value="Modifier l'enquête">
+			<c:if test="${typeAction eq 'update'}">
+				<input type="submit" value="Modifier l'enquête">
+			</c:if>
 		</form>		
 	</body>
 </html>

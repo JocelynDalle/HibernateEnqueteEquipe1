@@ -3,6 +3,7 @@ package fr.humanbooster.fx.enquetes.servlets;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,17 +17,15 @@ import fr.humanbooster.fx.enquetes.service.impl.SurveyServiceImpl;
 /**
  * Servlet implementation class SurveyServlet
  */
+@WebServlet("/SurveyServlet")
 public class SurveyServlet extends HttpServlet {
+
+	private static final long serialVersionUID = -942489127115599803L;
 
 	private SurveyService surveyService;
 //	private PartnerSiteService partnerSiteService;
 	private Survey surveyPhone;
 	private Survey surveyInternet;
-	
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -942489127115599803L;
 
 	/**
      * @see HttpServlet#HttpServlet()
@@ -44,12 +43,26 @@ public class SurveyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("heho !");
 		String typeSurvey = "";	// type de l'enquête :    "surveyPhone"  | "surveyInternet"
 		String typeAction = "";	// type de l'action :	"create" | "update"
 		int idSurvey = -1;
 		
+		System.out.println("typeAction " + request.getParameter("typeAction"));	// A VIRER
+		System.out.println("typeAction " + request.getParameter("typeAction"));	// A VIRER
+		System.out.println("typeSurvey " + request.getParameter("typeSurvey"));	// A VIRER
+		System.out.println("typeSurvey " + request.getParameter("typeSurvey"));	// A VIRER
+		System.out.println("idSurvey " + request.getParameter("idSurvey"));
+		
+		surveyPhone = surveyService.findById(1);
+		System.out.println("test survey findById : " + surveyPhone);
+		
+		
+		typeSurvey = request.getParameter("typeSurvey");
+		typeAction = request.getParameter("typeAction");
+		
 		// suivant si on se trouve dans le cas de :
-		switch (request.getParameter("typeAction")) {
+		switch (typeAction) {
 		// création d'une nouvelle enquête
 		case "create":
 			request.setAttribute("typeAction", "create");
@@ -67,7 +80,6 @@ public class SurveyServlet extends HttpServlet {
 				}
 				
 				// on récupère l'enquête
-				typeSurvey = request.getParameter("typeSurvey");
 				switch (typeSurvey) {
 				case "surveyPhone":
 					surveyPhone = surveyService.findById(idSurvey);
@@ -105,6 +117,8 @@ public class SurveyServlet extends HttpServlet {
 			request.setAttribute("survey", surveyInternet);
 			break;	
 		}
+		
+		request.getRequestDispatcher("survey.jsp").forward(request, response);
 			
 	}
 
