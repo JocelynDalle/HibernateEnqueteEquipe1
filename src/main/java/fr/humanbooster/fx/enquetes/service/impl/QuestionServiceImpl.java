@@ -22,17 +22,18 @@ public class QuestionServiceImpl implements QuestionService{
 	}
 
 	@Override
-	public Boolean deleteQuestion(int idQuestion) {
+	public Boolean deleteQuestion(String idQuestion) {
 		qDao.openCurrentSessionWithTransaction();
-		Boolean b = qDao.deleteQuestion(idQuestion);
+		Boolean b = qDao.deleteQuestion(Integer.parseInt(idQuestion));
 		qDao.closeCurrentSessionwithTransaction();
 		return b;
 	}
 
 	@Override
-	public Question addQuestionToSurvey(String wording, int idSurvey) {
+	public Question addQuestionToSurvey(String wording, String idSurvey) {
+		
 		sDao.openCurrentSessionWithTransaction();
-		Survey survey = sDao.findById(idSurvey);
+		Survey survey = sDao.findById(Integer.parseInt(idSurvey));
 		sDao.closeCurrentSessionwithTransaction();
 		
 		Question question = new Question();
