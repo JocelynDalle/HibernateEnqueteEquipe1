@@ -9,7 +9,7 @@ import javax.persistence.ManyToMany;
 @Entity
 public class SurveyInternet extends Survey {
 	
-	@ManyToMany (fetch = FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.EAGER)
 	private Set<PartnerSite> lsPartnerSite;
 
 	public Set<PartnerSite> getLsPartnerSite() {
@@ -19,5 +19,7 @@ public class SurveyInternet extends Survey {
 	public void setLsPartnerSite(Set<PartnerSite> lsPartnerSite) {
 		this.lsPartnerSite = lsPartnerSite;
 	}
+
+
 
 }

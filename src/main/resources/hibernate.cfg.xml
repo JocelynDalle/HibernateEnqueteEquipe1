@@ -23,7 +23,7 @@
 		<mapping class="fr.humanbooster.fx.enquetes.business.Fact"></mapping>
 		<mapping class="fr.humanbooster.fx.enquetes.business.PartnerSite"></mapping>
 		<mapping class="fr.humanbooster.fx.enquetes.business.Question"></mapping>
-		<mapping class="fr.humanbooster.fx.enquetesx.business.Survey"></mapping>
+		<mapping class="fr.humanbooster.fx.enquetes.business.Survey"></mapping>
 		<mapping class="fr.humanbooster.fx.enquetes.business.SurveyPhone"></mapping>
 		<mapping class="fr.humanbooster.fx.enquetes.business.SurveyInternet"></mapping>
 
