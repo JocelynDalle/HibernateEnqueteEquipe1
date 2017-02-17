@@ -11,14 +11,14 @@
 <body>
 	<h1>Liste des Enquetes</h1>
 	<br>
-	<c:forEach var="enquete" items="${surveys}">
+	<c:forEach var="survey" items="${surveys}">
 		<h2>${survey.name}</h2>
 		<div>Plannifi&eacute;e le: ${survey.date}</div>
 	</c:forEach>
 	<br>
 	<br>
-	<a href="AddSurveyServlet?type=1">Ajouter une Enquête téléphonique</a>
-	<br><a href="AddSurveyServlet?type=0">Ajouter une Enquête internet</a>
+	<a href="SurveyServlet?type=1">Ajouter une Enquête téléphonique</a>
+	<br><a href="SurveyServlet?type=0">Ajouter une Enquête internet</a>
 	<br>
 	<p>Nombre total d'enquete(s): ${enquetes.size()}</p>
 </body>

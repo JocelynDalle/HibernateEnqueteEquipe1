@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import fr.humanbooster.fx.enquetes.business.Survey;
 import fr.humanbooster.fx.enquetes.service.QuestionService;
 import fr.humanbooster.fx.enquetes.service.SurveyService;
+import fr.humanbooster.fx.enquetes.service.impl.QuestionServiceImpl;
 import fr.humanbooster.fx.enquetes.service.impl.SurveyServiceImpl;
 
 /**
@@ -35,15 +36,8 @@ public class SurveysServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int type = Integer.valueOf(request.getParameter("type"));
 		Set<Survey> surveys = ss.findAllSurvey();
-		if(type == 0) {
-			request.setAttribute("type", 0);
-			request.getRequestDispatcher("survey.jsp").forward(request, response);
-		} else {
-			request.setAttribute("type", 1);
-			request.getRequestDispatcher("survey.jsp").forward(request, response);
-		}
+		request.setAttribute("surveys", surveys);
 	}
 
 	/**
