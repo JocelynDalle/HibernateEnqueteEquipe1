@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Liste des Enquetes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Ajouter des Enquetes</title>
 </head>
 <body>
 	<h1>Liste des Enquetes</h1>
@@ -17,8 +16,7 @@
 	</c:forEach>
 	<br>
 	<br>
-	<a href="AddSurveyServlet?type=1">Ajouter une Enquete téléphonique</a>
-	<br><a href="AddSurveyServlet?type=0">Ajouter une Enquête internet</a>
+	<a href="AddSurveyServlet?type=1">Ajouter une Enquete téléphonique</a><a href="AddSurveyServlet?type=0">Ajouter une Enquete </a>
 	<br>
 	<p>Nombre total d'enquete(s): ${enquetes.size()}</p>
 </body>

@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 
-public abstract class Survey {
+public abstract class Survey implements Comparable<Survey> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
