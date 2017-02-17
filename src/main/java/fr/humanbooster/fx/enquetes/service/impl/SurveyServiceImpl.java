@@ -3,6 +3,8 @@ package fr.humanbooster.fx.enquetes.service.impl;
 import java.util.Set;
 
 import fr.humanbooster.fx.enquetes.business.Survey;
+import fr.humanbooster.fx.enquetes.business.SurveyInternet;
+import fr.humanbooster.fx.enquetes.business.SurveyPhone;
 import fr.humanbooster.fx.enquetes.dao.SurveyDao;
 import fr.humanbooster.fx.enquetes.dao.impl.SurveyDaoImpl;
 import fr.humanbooster.fx.enquetes.service.SurveyService;
@@ -43,6 +45,24 @@ public class SurveyServiceImpl implements SurveyService{
 		Survey survey = sDao.findById(idSurvey);
 		sDao.closeCurrentSessionwithTransaction();
 		return survey;
+	}
+
+
+	@Override
+	public SurveyInternet createSurveyInternet(SurveyInternet surveyInternet) {
+		sDao.openCurrentSessionWithTransaction();
+		SurveyInternet _surveyInternet = (SurveyInternet) sDao.createSurvey(surveyInternet);
+		sDao.closeCurrentSessionwithTransaction();
+		return _surveyInternet;
+	}
+
+
+	@Override
+	public SurveyPhone createSurveyPhone(SurveyPhone surveyPhone) {
+		sDao.openCurrentSessionWithTransaction();
+		SurveyPhone _surveyPhone = (SurveyPhone) sDao.createSurvey(surveyPhone);
+		sDao.closeCurrentSessionwithTransaction();
+		return _surveyPhone;
 	}
 
 }
