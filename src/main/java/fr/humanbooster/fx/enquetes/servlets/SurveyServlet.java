@@ -24,7 +24,7 @@ public class SurveyServlet extends HttpServlet {
 
 	private SurveyService surveyService;
 //	private PartnerSiteService partnerSiteService;
-	private Survey survey;
+	private Survey survey = null;
 	//private Survey surveyInternet;
 
 	/**
@@ -33,6 +33,7 @@ public class SurveyServlet extends HttpServlet {
     public SurveyServlet() {
         super();
         surveyService = new SurveyServiceImpl();
+   
         //surveyPhone = new SurveyPhone();
         //surveyInternet = new SurveyInternet();
         
@@ -44,6 +45,7 @@ public class SurveyServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("heho !");
+		
 		String typeSurvey = "";	// type de l'enquête :    "surveyPhone"  | "surveyInternet"
 		String typeAction = "";	// type de l'action :	"create" | "update"
 		int idSurvey = -1;
@@ -82,9 +84,11 @@ public class SurveyServlet extends HttpServlet {
 				// on récupère l'enquête
 				switch (typeSurvey) {
 				case "surveyPhone":
+					survey = new SurveyPhone();
 					survey = surveyService.findById(idSurvey);
 					break;
 				case "surveyInternet":
+					survey = new SurveyInternet();
 					survey = surveyService.findById(idSurvey);
 					break;
 				default:	
