@@ -6,6 +6,25 @@ import javax.persistence.Entity;
 public class SurveyPhone extends Survey {
 	
 	private String script;
+	
+	public SurveyPhone() {
+		super();
+	}
+	
+	public SurveyPhone(String name, float price, String script) {
+		super();
+		super.setName(name);
+		super.setPrice(price);
+		this.script = script;
+	}
+	
+	public SurveyPhone(int id, String name, float price, String script) {
+		super();
+		super.setId(id);
+		super.setName(name);
+		super.setPrice(price);
+		this.script = script;
+	}	
 
 	public String getScript() {
 		return script;
