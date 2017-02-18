@@ -14,16 +14,15 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
-<title>Ajouter une question</title>
+<title>Modifier une question</title>
 </head>
 <body>
-	<h1>Nouvelle question</h1>
-	<h3>Pour l'enquête ${survey.name}</h3>
-	<form action="QuestionAddServlet" method="post">
-	<input name="idSurvey" type="hidden" value="${survey.id}">
+	<h1>Modifier question</h1>
+	<form action="QuestionUpdateServlet" method="post">
+	<input name="idQuestion" type="hidden" value="${question.id}">
 		<label>Libellé de la question</label> <br>
-		<textarea class="form-control" rows="3" name="wording" required>Votre Question ici</textarea>
-		<button type="submit">Ajouter</button>
+		<textarea class="form-control" rows="3" name="wording" required>${question.wording}</textarea>
+		<button type="submit">Modifier</button>
 
 	</form>
 </body>

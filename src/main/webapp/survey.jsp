@@ -11,6 +11,7 @@
 	<body>
 		<h1>Enquête</h1>
 		<form method="POST" action="SurveyServlet">
+			<input type=hidden name="id" value="${survey}">
 			<label>Nom  :
 				<input type="text" name="name" placeholder="Entrez le nom de l'enquête" value="${survey.name}" required>
 			</label><br>
@@ -21,7 +22,6 @@
 				<input type="date" name="date" required>
 			</label><br>
 			<c:if test="${typeSurvey eq 'surveyPhone'}">
-				
 				<label>Script :<br>
 					 <textarea rows="4" cols="50">${survey.script}</textarea> 
 				</label><br>
@@ -37,10 +37,10 @@
 				</label>
 			</c:if>
 			<c:if test="${typeAction eq 'create'}">
-				<input type="submit" value="Ajouter l'enquête">
+				<input type="submit" name="create" value="Ajouter l'enquête">
 			</c:if>
 			<c:if test="${typeAction eq 'update'}">
-				<input type="submit" value="Modifier l'enquête">
+				<input type="submit" name="update" value="Modifier l'enquête">
 			</c:if>
 		</form>		
 	</body>

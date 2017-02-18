@@ -130,9 +130,17 @@ public class SurveyServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		boolean create = request.getParameter("create") != null;
+		System.out.println("create " + create);
+		boolean update = request.getParameter("update") != null;
+		System.out.println("update :" + update);
+//		System.out.println("type d'enquête : " + typeSurvey);
+//		String typeAction = (String) request.getAttribute("typeAction");
+//		System.out.println("type d'action : " + typeAction);
+//		Survey survey
 		
-		doGet(request, response);
+		
+//		request.getRequestDispatcher("SurveysServlet").forward(request, response);
 	}
 
 }
