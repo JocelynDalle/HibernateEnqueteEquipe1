@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
-public class Department {
+public class Department implements Comparable<Department> {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -63,7 +63,13 @@ public class Department {
 	public String toString() {
 		return "Department [id=" + id + ", number=" + number + ", name=" + name + ", lsCriteria=" + lsCriteria + "]";
 	}
-	
-	
+
+	@Override
+	public int compareTo(Department o) {
+		if(this.getId() == o.getId()) {
+			return 0;
+		}
+		return this.getId() > o.getId() ? 1 : -1;
+	}
 	
 }

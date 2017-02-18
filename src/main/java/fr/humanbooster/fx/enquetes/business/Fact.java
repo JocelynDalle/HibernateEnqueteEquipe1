@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Fact {
+public class Fact implements Comparable<Fact> {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -23,18 +23,29 @@ public class Fact {
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public String getWording() {
 		return wording;
 	}
+	
 	public void setWording(String wording) {
 		this.wording = wording;
 	}
+	
 	@Override
 	public String toString() {
 		return "Fact [id=" + id + ", wording=" + wording + ", lsCriteria=" + lsCriteria + "]";
 	}
 	
+	@Override
+	public int compareTo(Fact o) {
+		if(this.getId() == o.getId()) {
+			return 0;
+		}
+		return this.getId() > o.getId() ? 1 : -1;
+	}
 }

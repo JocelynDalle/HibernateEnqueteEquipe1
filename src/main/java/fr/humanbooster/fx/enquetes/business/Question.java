@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Question {
+public class Question implements Comparable<Question> {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -45,6 +45,14 @@ public class Question {
 	@Override
 	public String toString() {
 		return "Question [id=" + id + ", wording=" + wording + ", survey=" + survey + "]";
+	}
+
+	@Override
+	public int compareTo(Question o) {
+		if(this.getId() == o.getId()) {
+			return 0;
+		}
+		return this.getId() > o.getId() ? 1 : -1;
 	}
 
 }
