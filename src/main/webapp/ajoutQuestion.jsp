@@ -17,14 +17,16 @@
 <title>Ajouter une question</title>
 </head>
 <body>
-	<h1>Nouvelle question</h1>
-	<h3>Pour l'enquête ${survey.name}</h3>
-	<form action="QuestionAddServlet" method="post">
-	<input name="idSurvey" type="hidden" value="${survey.id}">
-		<label>Libellé de la question</label> <br>
-		<textarea class="form-control" rows="3" name="wording" required>Votre Question ici</textarea>
-		<button type="submit">Ajouter</button>
+	<div class="container-fluid">
+		<h1>Nouvelle question</h1>
+		<h3>Pour l'enquête ${survey.name}</h3>
+		<form action="QuestionAddServlet" method="post">
+			<input name="idSurvey" type="hidden" value="${survey.id}"> <label>Libellé
+				de la question</label> <br>
+			<input type="text" autofocus placeholder="Votre Question ici" class="form-control" rows="3" name="wording" required/>
+			<button type="submit">Ajouter</button>
 
-	</form>
+		</form>
+	</div>
 </body>
 </html>

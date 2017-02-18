@@ -17,13 +17,15 @@
 <title>Modifier une question</title>
 </head>
 <body>
-	<h1>Modifier question</h1>
-	<form action="QuestionUpdateServlet" method="post">
-	<input name="idQuestion" type="hidden" value="${question.id}">
-		<label>Libellé de la question</label> <br>
-		<textarea class="form-control" rows="3" name="wording" required>${question.wording}</textarea>
-		<button type="submit">Modifier</button>
+	<div class="container-fluid">
+		<h1>Modifier question</h1>
+		<form action="QuestionUpdateServlet" method="post">
+			<input name="idQuestion" type="hidden" value="${question.id}">
+			<label>Libellé de la question</label> <br>
+			<textarea class="form-control" rows="3" name="wording" required>${question.wording}</textarea>
+			<button type="submit">Modifier</button>
 
-	</form>
+		</form>
+	</div>
 </body>
 </html>
