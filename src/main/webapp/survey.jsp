@@ -23,16 +23,13 @@
 			</label><br>
 			<c:if test="${typeSurvey eq 'surveyPhone'}">
 				<label>Script :<br>
-					 <textarea rows="4" cols="50">${survey.script}</textarea> 
+					 <textarea name="script" rows="4" cols="50">${survey.script}</textarea> 
 				</label><br>
 			</c:if>
 			<c:if test="${typeSurvey eq 'surveyInternet'}">
 				<label>Sites partenaires :
-					<select>
-						<c:forEach items="${partnerSites}" var="partnerSite">
-							<option>heho</option>
-							<option value="${partnerSite.id}">${partnerSite.name}</option>
-						</c:forEach>					
+					<select name="idsPartnerSite">
+							<option>heho</option>		
 					</select>
 				</label>
 			</c:if>
