@@ -59,7 +59,7 @@
 								<em>Plannifi&eacute;e le:</em> <strong>${survey.date}</strong>
 							</div>
 							<div class="col-md-4 text-right">
-								<form action="SurveyServlet" method="get">
+								<form action="SurveysServlet" method="post">
 									<div class="btn-group" role="group"">
 										<button type="submit" name="typeAction" value="update"
 											class="btn btn-success">Modifier l'enquête</button>

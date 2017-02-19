@@ -16,39 +16,60 @@ import fr.humanbooster.fx.enquetes.service.SurveyService;
 import fr.humanbooster.fx.enquetes.service.impl.QuestionServiceImpl;
 import fr.humanbooster.fx.enquetes.service.impl.SurveyServiceImpl;
 
-
 /**
  * Servlet implementation class SurveysServlet
  */
 @WebServlet("/SurveysServlet")
 public class SurveysServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	private SurveyService ss = new SurveyServiceImpl();
-    private QuestionService qs = new QuestionServiceImpl();
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public SurveysServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	private QuestionService qs = new QuestionServiceImpl();
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public SurveysServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		Set<Survey> surveys = ss.findAllSurvey();
 		request.setAttribute("surveys", surveys);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String typeAction = request.getParameter("typeAction");
+		String typeSurvey = request.getParameter("typeSurvey");
+		int idSurvey = Integer.valueOf(request.getParameter("idSurvey"));
+		if (typeAction != null && typeSurvey != null) {
+			if (typeAction.equals("update")) {
+				request.setAttribute("typeAction", typeAction);
+				request.setAttribute("typeSurvey", typeSurvey);
+				request.setAttribute("idSurvey", idSurvey);
+				request.getRequestDispatcher("survey.jsp").forward(request, response);
+			} else if (typeAction.equals("delete")) {
+				boolean deleted = ss.deleteSurvey(idSurvey);
+				System.out.println("l'enquête " + idSurvey + " a été supprimée");
+				response.sendRedirect("index");
+			} else {
+				System.out.println("problème de d'attribut update et delete dans l'index");
+				request.getRequestDispatcher("index").forward(request, response);
+			}
+		}
+
 	}
 
 }
