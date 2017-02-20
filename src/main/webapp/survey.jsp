@@ -11,7 +11,7 @@
 	<body>
 		<h1>Enquête</h1>
 		<form method="POST" action="SurveyServlet">
-			<input type=hidden name="id" value="${survey}">
+			<input type=hidden name="id" value="${survey.id}">
 			<label>Nom  :
 				<input type="text" name="name" placeholder="Entrez le nom de l'enquête" value="${survey.name}" required>
 			</label><br>
@@ -23,16 +23,13 @@
 			</label><br>
 			<c:if test="${typeSurvey eq 'surveyPhone'}">
 				<label>Script :<br>
-					 <textarea rows="4" cols="50">${survey.script}</textarea> 
+					 <textarea name="script" rows="4" cols="50">${survey.script}</textarea> 
 				</label><br>
 			</c:if>
 			<c:if test="${typeSurvey eq 'surveyInternet'}">
 				<label>Sites partenaires :
-					<select>
-						<c:forEach items="${partnerSites}" var="partnerSite">
-							<option>heho</option>
-							<option value="${partnerSite.idV}">${partnerSite.name}</option>
-						</c:forEach>					
+					<select name="idsPartnerSite">
+							<option>heho</option>		
 					</select>
 				</label>
 			</c:if>

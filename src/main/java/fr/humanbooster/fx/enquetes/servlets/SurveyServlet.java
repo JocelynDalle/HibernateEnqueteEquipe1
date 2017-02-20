@@ -1,6 +1,7 @@
 package fr.humanbooster.fx.enquetes.servlets;
 
 import java.io.IOException;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,26 +45,16 @@ public class SurveyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("heho !");
 		
 		String typeSurvey = "";	// type de l'enquête :    "surveyPhone"  | "surveyInternet"
 		String typeAction = "";	// type de l'action :	"create" | "update"
-		int idSurvey = -1;
-		
-		System.out.println("typeAction " + request.getParameter("typeAction"));	// A VIRER
-		System.out.println("typeAction " + request.getParameter("typeAction"));	// A VIRER
-		System.out.println("typeSurvey " + request.getParameter("typeSurvey"));	// A VIRER
-		System.out.println("typeSurvey " + request.getParameter("typeSurvey"));	// A VIRER
-		System.out.println("idSurvey " + request.getParameter("idSurvey"));
-		
-//		surveyPhone = surveyService.findById(1);
-//		System.out.println("test survey findById : " + surveyPhone);
-		
+		int idSurvey = -1;		
 		
 		typeSurvey = request.getParameter("typeSurvey");
 		typeAction = request.getParameter("typeAction");
 		
-		// suivant si on se trouve dans le cas de :
+		// suivant si on se trouve dans le cas de création d'une nouvelle enquête
+		// ou de modification d'une enquête existante
 		switch (typeAction) {
 		// création d'une nouvelle enquête
 		case "create":
@@ -103,26 +94,29 @@ public class SurveyServlet extends HttpServlet {
 				
 			}
 			break;
-		default:	
-			// on n'a pas un type d'action parmi les 2 existants fourni dans l'url
+		// on n'a pas un type d'action parmi les 2 existants fourni dans l'url
+		default:		
 			// A GERER
 			break;
 		}
 
-		// on passe les bons attributs (survey et typeSurvey) à la vue 
-		switch (typeSurvey) {
-		case "surveyPhone": 			
-			request.setAttribute("typeSurvey", "surveyPhone");
+		// si typeSurvey n'est ni "surveyPhone", ni "surveyInternet"
+		// ce n'est pas normal
+		if (!typeSurvey.equals("surveyPhone") && !typeSurvey.equals("surveyInternet")) {
+			// cas à traiter
+			/*
+			Set<Survey> surveys = surveyService.findAllSurvey();
+			request.setAttribute("surveys", surveys);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+			 */
+		} else {
+			// sinon, si typeSurvey a une valeur cohérente
+			// on passe les bons attributs (survey et typeSurvey) à la vue 
+			request.setAttribute("typeSurvey", typeSurvey);
 			request.setAttribute("survey", survey);
-			break;
 			
-		case "surveyInternet":
-			request.setAttribute("typeSurvey", "surveyInternet");
-			request.setAttribute("survey", survey);
-			break;	
+			request.getRequestDispatcher("survey.jsp").forward(request, response);			
 		}
-		
-		request.getRequestDispatcher("survey.jsp").forward(request, response);
 			
 	}
 
@@ -130,17 +124,74 @@ public class SurveyServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		boolean create = request.getParameter("create") != null;
-		System.out.println("create " + create);
-		boolean update = request.getParameter("update") != null;
-		System.out.println("update :" + update);
-//		System.out.println("type d'enquête : " + typeSurvey);
-//		String typeAction = (String) request.getAttribute("typeAction");
-//		System.out.println("type d'action : " + typeAction);
-//		Survey survey
+
+		// on détermine si on est dans le cas d'une création ou d'une modification d'une enquête
+		String typeAction = "";
+		if (request.getParameter("create") != null) {
+			typeAction = "create";
+		} else if (request.getParameter("update") != null) {
+			typeAction = "update";
+		}
 		
+		// on détermine s'il s'agit d'une surveyPhone ou d'une surveyInternet
+		String typeSurvey = "";
+		if (request.getParameter("script") != null) {
+			typeSurvey = "surveyPhone";
+		} else if (request.getParameter("idsPartnerSite") != null) {
+			typeSurvey = "surveyInternet";
+		}		
 		
-//		request.getRequestDispatcher("SurveysServlet").forward(request, response);
+		// si on retrouve bien un type d'action connu : create | update
+		if (typeAction.equals("create")) {
+			// on enregistre la nouvelle enquête
+			// cas 1 : cas d'une enquête téléphonique (surveyPhone)
+			if (typeSurvey.equals("surveyPhone")) {
+				surveyService.createSurveyPhone(
+					new SurveyPhone(
+						request.getParameter("name"),
+						Float.parseFloat(request.getParameter("price")),
+						request.getParameter("script")
+					));
+			// cas 2 : cas d'une enquête internet (surveyInternet)
+			} else if (typeSurvey.equals("surveyInternet")) {
+				surveyService.createSurveyInternet(
+					new SurveyInternet(
+						request.getParameter("name"),
+						Float.parseFloat(request.getParameter("price"))
+					));
+			}
+
+		} else if (typeAction.equals("update")) {
+			// on modifie l'enquête existante dont on récupère d'abord l'id
+			int id = Integer.parseInt(request.getParameter("id"));
+			// on vérifie que l'enquête identifiée par cet id existe effectivement
+			if (surveyService.findById(id) != null) {
+			
+				// cas 1 : cas d'une enquête téléphonique (surveyPhone)
+				if (typeSurvey.equals("surveyPhone")) {
+					surveyService.modifySurvey(
+							new SurveyPhone(
+								id,
+								request.getParameter("name"),
+								Float.parseFloat(request.getParameter("price")),
+								request.getParameter("script")
+							));
+				// cas 2 : cas d'une enquête internet (surveyInternet)
+				} else if (typeSurvey.equals("surveyInternet")) {
+					surveyService.modifySurvey(
+						new SurveyInternet(
+								id,
+								request.getParameter("name"),
+								Float.parseFloat(request.getParameter("price"))
+						));
+				} // end if (typeSurvey.equals("surveyPhone")) 
+			}	// end if (surveyService.findById(id) != null)
+		}	// end if (typeAction.equals("create"))
+		
+		Set<Survey> surveys = surveyService.findAllSurvey();
+		request.setAttribute("surveys", surveys);
+		request.getRequestDispatcher("index.jsp").forward(request, response);			
+	
 	}
 
 }
