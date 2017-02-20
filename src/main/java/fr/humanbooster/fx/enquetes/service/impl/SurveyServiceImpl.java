@@ -73,8 +73,7 @@ public class SurveyServiceImpl implements SurveyService{
 		sDao.closeCurrentSessionwithTransaction();
 		return survey;
 	}
-
-
+	
 	@Override
 	public SurveyInternet createSurveyInternet(SurveyInternet surveyInternet) {
 		sDao.openCurrentSessionWithTransaction();
