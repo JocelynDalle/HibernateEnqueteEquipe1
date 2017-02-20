@@ -6,10 +6,14 @@
 
 	<session-factory>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/surveyG1</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/surveyG1?useUnicode=true&amp;characterEncoding=utf-8</property>
 		<property name="hibernate.connection.username">root</property>
 
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+		<property name="hibernate.connection.CharSet">utf-8</property>
+		<property name="hibernate.connection.characterEncoding">utf-8</property>
+		<property name="hibernate.connection.useUnicode">true</property>
 
 		<property name="connection.pool_size">10</property>
 
@@ -26,7 +30,7 @@
 		<mapping class="fr.humanbooster.fx.enquetes.business.Survey"></mapping>
 		<mapping class="fr.humanbooster.fx.enquetes.business.SurveyPhone"></mapping>
 		<mapping class="fr.humanbooster.fx.enquetes.business.SurveyInternet"></mapping>
-		
+
 	</session-factory>
 
 </hibernate-configuration>
