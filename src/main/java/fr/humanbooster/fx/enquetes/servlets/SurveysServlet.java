@@ -40,6 +40,7 @@ public class SurveysServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
 		Set<Survey> surveys = ss.findAllSurvey();
 		request.setAttribute("surveys", surveys);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -51,6 +52,7 @@ public class SurveysServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
 		String typeAction = request.getParameter("typeAction");
 		String typeSurvey = request.getParameter("typeSurvey");
 		int idSurvey = Integer.valueOf(request.getParameter("idSurvey"));
