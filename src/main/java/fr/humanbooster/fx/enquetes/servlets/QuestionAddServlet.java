@@ -54,8 +54,8 @@ public class QuestionAddServlet extends HttpServlet {
 		String idSurvey = request.getParameter("idSurvey");
 		String wording = request.getParameter("wording");
 		qs.addQuestionToSurvey(wording, idSurvey);
-		request.getRequestDispatcher("index").forward(request, response);
-		doGet(request, response);
+		response.sendRedirect("index");
+//		request.getRequestDispatcher("index").forward(request, response);
 	}
 
 }

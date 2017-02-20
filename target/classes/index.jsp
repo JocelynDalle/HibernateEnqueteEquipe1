@@ -18,52 +18,91 @@
 </head>
 <body>
 	<div class="container-fluid">
-		<h1>Liste des Enquetes</h1>
-		<br>
-		<c:forEach var="survey" items="${surveys}">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h2>${survey.name}</h2>
-				</div>
-				<div class="panel-body">
-					<c:choose>
-						<c:when test="${survey.getClass().simpleName eq 'SurveyPhone'}">
-			Enquête téléphonique
-			<br>
-							<div class="list-group">
-								<a href="#" class="list-group-item disabled"> Liste des
-									questions <a href="QuestionAddServlet?idSurvey=${survey.id}"><Buttton
-											class="btn btn-primary">Ajouter une question</Buttton></a>
-								</a>
-								<c:forEach var="question" items="${survey.lsQuestion}">
-									<a href="QuestionUpdateServlet?idQuestion=${question.id}"
-										class="list-group-item">${question.wording} </a>
-								</c:forEach>
+		<nav class="navbar navbar-default navbar-fixed-bottom">
+			<p class="navbar-right">
+				<a href="SurveyServlet?typeAction=create&typeSurvey=surveyPhone">
+					<button type="submit" class="btn btn-primary navbar-btn">
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+						Enquête téléphonique
+					</button>
+				</a> <a href="SurveyServlet?typeAction=create&typeSurvey=surveyInternet">
+					<button type="submit" class="btn btn-primary navbar-btn">
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+						Enquête internet
+					</button>
+				</a> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			</p>
+			<p class="navbar-text">Nombre total d'enquête(s):
+				${surveys.size()}</p>
+		</nav>
+		<div class="container-fluid">
+			<h1>Liste des Enquetes</h1>
+			<c:forEach var="survey" items="${surveys}">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-md-4 text-left">
+								<h4>
+									<strong>${survey.name}</strong>
+								</h4>
+								<c:choose>
+									<c:when test="${survey.getClass().simpleName eq 'SurveyPhone'}">
+										<span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+									</c:when>
+									<c:otherwise>
+										<span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
+									</c:otherwise>
+								</c:choose>
+								${survey.getClass().simpleName eq 'SurveyPhone' ? "Enquête téléphonique" : "Enquête internet"}
 							</div>
-							<br>
-							<a
-								href="SurveyServlet?typeAction=update&typeSurvey=surveyPhone&idSurvey=${survey.id}">
-							<button class="btn btn-success">Modifier enquête</button></a>
-							<br>
-						</c:when>
-						<c:otherwise>
-			Enquête internet
-			<a
-								href="SurveyServlet?typeAction=update&typeSurvey=surveyInternet&idSurvey=${survey.id }">
-							<button class="btn btn-success">Modifier enquête</button></a>
-						</c:otherwise>
-					</c:choose>
+							<div class="col-md-4 text-center">
+								<em>Plannifi&eacute;e le:</em> <strong>${survey.date}</strong>
+							</div>
+							<div class="col-md-4 text-right">
+								<form action="SurveysServlet" method="post">
+									<div class="btn-group" role="group"">
+										<button type="submit" name="typeAction" value="update"
+											class="btn btn-success">Modifier l'enquête</button>
+										<input type="hidden" name="typeSurvey"
+											value="${survey.getClass().simpleName eq 'SurveyPhone' ? "surveyPhone" : "surveyInternet"}">
+										<input type="hidden" name="idSurvey" value="${survey.id}">
+										<button type="submit" name="typeAction" value="delete"
+											class="btn btn-warning">
+											<span class="glyphicon glyphicon-remove-sign"
+												aria-hidden="true"></span>
+										</button>
+									</div>
+								</form>
+								<br> prix <strong>${survey.price}</strong> € HT
+							</div>
+						</div>
+					</div>
+					<div class="panel-body">
+						<c:if test="${survey.getClass().simpleName eq 'SurveyPhone'}">
+							<blockquote>
+								<p>${survey.script}</p>
+								<footer>
+									<span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span><cite
+										title="Source Title"> Accroche téléphonique</cite>
+								</footer>
+
+							</blockquote>
+						</c:if>
+						<div class="list-group">
+							<a href="QuestionAddServlet?idSurvey=${survey.id}"
+								class="list-group-item list-group-item-info">Ajouter une
+								question</a>
+							<c:forEach var="question" items="${survey.lsQuestion}">
+								<a href="QuestionUpdateServlet?idQuestion=${question.id}"
+									class="list-group-item">${question.wording} </a>
+							</c:forEach>
+						</div>
+					</div>
 				</div>
-				<div class="panel-footer">Plannifi&eacute;e le: ${survey.date}
-				</div>
-			</div>
-		</c:forEach>
-		<br> <br> <a
-			href="SurveyServlet?typeSurvey=surveyPhone&typeAction=create">Ajouter
-			une Enquête téléphonique</a> <br> <a
-			href="SurveyServlet?typeSurvey=surveyInternet&typeAction=create">Ajouter
-			une Enquête internet</a> <br>
-		<p>Nombre total d'enquete(s): ${surveys.size()}</p>
+			</c:forEach>
+			<br> <br>
+
+		</div>
 	</div>
 </body>
 </html>

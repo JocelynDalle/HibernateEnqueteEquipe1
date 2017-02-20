@@ -23,12 +23,15 @@
     <url-pattern>/enquetes</url-pattern>
     <url-pattern>/surveys</url-pattern>
   </servlet-mapping>
+<<<<<<< HEAD
+=======
   <servlet>
     <servlet-name>QuestionAddServlet</servlet-name>
     <servlet-class>fr.humanbooster.fx.enquetes.servlets.QuestionAddServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>QuestionAddServlet</servlet-name>
-    <url-pattern>/ajoutQuestion</url-pattern>
+    <url-pattern>/question</url-pattern>
   </servlet-mapping>
+>>>>>>> 17488a4980016d251ed7e383acb0287a7b64663b
 </web-app>
