@@ -29,6 +29,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>QuestionAddServlet</servlet-name>
-    <url-pattern>/question</url-pattern>
+    <url-pattern>/ajoutQuestion</url-pattern>
   </servlet-mapping>
 </web-app>

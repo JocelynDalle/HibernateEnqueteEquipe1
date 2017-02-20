@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class PartnerSite {
+public class PartnerSite implements Comparable<PartnerSite> {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -26,20 +26,33 @@ public class PartnerSite {
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public String getUrl() {
 		return url;
 	}
+	
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	@Override
+	public int compareTo(PartnerSite o) {
+		if(this.getId() == o.getId()) {
+			return 0;
+		}
+		return this.getId() > o.getId() ? 1 : -1;
 	}
 	
 	

@@ -23,6 +23,9 @@ public class SurveyPhone extends Survey {
 
 	@Override
 	public int compareTo(Survey o) {
+		if(this.getId() == o.getId()) {
+			return 0;
+		}
 		return this.getId() > o.getId() ? 1 : -1;
 	}
 	

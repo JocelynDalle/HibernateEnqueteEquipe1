@@ -1,17 +1,26 @@
 package fr.humanbooster.fx.enquetes.service.impl;
 
 import java.util.Set;
+import java.util.TreeSet;
 
+import fr.humanbooster.fx.enquetes.business.Criteria;
+import fr.humanbooster.fx.enquetes.business.Question;
 import fr.humanbooster.fx.enquetes.business.Survey;
 import fr.humanbooster.fx.enquetes.business.SurveyInternet;
 import fr.humanbooster.fx.enquetes.business.SurveyPhone;
+import fr.humanbooster.fx.enquetes.dao.CriteriaDao;
+import fr.humanbooster.fx.enquetes.dao.QuestionDao;
 import fr.humanbooster.fx.enquetes.dao.SurveyDao;
+import fr.humanbooster.fx.enquetes.dao.impl.CriteriaDaoImpl;
+import fr.humanbooster.fx.enquetes.dao.impl.QuestionDaoImpl;
 import fr.humanbooster.fx.enquetes.dao.impl.SurveyDaoImpl;
 import fr.humanbooster.fx.enquetes.service.SurveyService;
 
 public class SurveyServiceImpl implements SurveyService{
 
 	private SurveyDao sDao = new SurveyDaoImpl();
+	private QuestionDao qDao = new QuestionDaoImpl();
+	private CriteriaDao cDao = new CriteriaDaoImpl(); 
 	
 	@Override
 	public Survey modifySurvey(Survey survey) {
@@ -24,8 +33,26 @@ public class SurveyServiceImpl implements SurveyService{
 
 	@Override
 	public Boolean deleteSurvey(int idSurvey) {
+		Boolean result = false;
 		sDao.openCurrentSessionWithTransaction();
-		Boolean result = sDao.deleteSurvey(idSurvey);
+		qDao.openCurrentSessionWithTransaction();
+		cDao.openCurrentSessionWithTransaction();
+		Survey survey = sDao.findById(idSurvey);
+		Set<Question> questions;
+		Set<Criteria> criterias;
+		if(survey != null) {
+			questions = survey.getLsQuestion();
+			criterias = survey.getSetCriteria();
+			for(Question q : questions) {
+				qDao.deleteQuestion(q.getId());
+			}
+			for(Criteria c : criterias) {
+				cDao.deleteCriteria(c.getId());
+			}
+			result = sDao.deleteSurvey(idSurvey);
+		}
+		cDao.closeCurrentSessionwithTransaction();
+		qDao.closeCurrentSessionwithTransaction();
 		sDao.closeCurrentSessionwithTransaction();
 		return result;
 	}
