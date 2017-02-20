@@ -11,8 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.humanbooster.fx.enquetes.business.Question;
+import fr.humanbooster.fx.enquetes.business.Survey;
 import fr.humanbooster.fx.enquetes.service.QuestionService;
+import fr.humanbooster.fx.enquetes.service.SurveyService;
 import fr.humanbooster.fx.enquetes.service.impl.QuestionServiceImpl;
+import fr.humanbooster.fx.enquetes.service.impl.SurveyServiceImpl;
 
 /**
  * Servlet implementation class QuestionAddServlet
@@ -20,7 +23,9 @@ import fr.humanbooster.fx.enquetes.service.impl.QuestionServiceImpl;
 @WebServlet("/QuestionUpdateServlet")
 public class QuestionUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	QuestionService qs = new QuestionServiceImpl();
+	
+	private SurveyService ss = new SurveyServiceImpl();
+	private QuestionService qs = new QuestionServiceImpl();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -36,9 +41,13 @@ public class QuestionUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		response.setCharacterEncoding("UTF-8");
 		String idQuestion = request.getParameter("idQuestion");
 		Question question = qs.findQuestionById(idQuestion);
+		String idSurvey = request.getParameter("idSurvey");
+		int idSurveyInt = Integer.parseInt(idSurvey);
+		Survey survey = ss.findById(idSurveyInt);
+		request.setAttribute("survey", survey);
 		request.setAttribute("question", question);
 		request.getRequestDispatcher("modifieQuestion.jsp").forward(request, response);
 		;
@@ -51,6 +60,7 @@ public class QuestionUpdateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
 		String idQuestion = request.getParameter("idQuestion");
 		System.out.println(idQuestion);
 		String wording = request.getParameter("wording");

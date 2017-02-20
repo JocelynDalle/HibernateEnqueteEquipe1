@@ -38,9 +38,11 @@ public class QuestionAddServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
 		String idSurvey = request.getParameter("idSurvey");
 		int idSurveyInt = Integer.parseInt(idSurvey);
 		Survey survey = ss.findById(idSurveyInt);
+		System.out.println("survey add question" + survey);
 		request.setAttribute("survey", survey);
 		request.getRequestDispatcher("ajoutQuestion.jsp").forward(request, response);
 	}
@@ -51,6 +53,7 @@ public class QuestionAddServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
 		String idSurvey = request.getParameter("idSurvey");
 		String wording = request.getParameter("wording");
 		qs.addQuestionToSurvey(wording, idSurvey);

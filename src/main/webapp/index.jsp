@@ -111,7 +111,7 @@
 											class="list-group-item list-group-item-info text-center">Ajouter une
 											question</a>
 										<c:forEach var="question" items="${survey.lsQuestion}">
-											<a href="QuestionUpdateServlet?idQuestion=${question.id}"
+											<a href="QuestionUpdateServlet?idSurvey=${survey.id}&idQuestion=${question.id}"
 												class="list-group-item">${question.wording} </a>
 										</c:forEach>
 									</div>
