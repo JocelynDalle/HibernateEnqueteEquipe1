@@ -60,7 +60,7 @@ public class SurveysServlet extends HttpServlet {
 			if (typeAction.equals("update")) {
 				request.setAttribute("typeAction", typeAction);
 				request.setAttribute("typeSurvey", typeSurvey);
-				request.setAttribute("idSurvey", idSurvey);
+				request.setAttribute("survey", ss.findById(idSurvey));
 				request.getRequestDispatcher("survey.jsp").forward(request, response);
 			} else if (typeAction.equals("delete")) {
 				boolean deleted = ss.deleteSurvey(idSurvey);
