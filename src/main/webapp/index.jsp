@@ -39,7 +39,7 @@
 			<p class="navbar-text">Nombre total d'enquête(s):
 				${surveys.size()}</p>
 		</nav>
-		<div class="container-fluid">
+		<div class="container-fluid">	
 			<h1>Liste des Enquetes</h1>
 			<c:forEach var="survey" items="${surveys}">
 				<div class="panel panel-default">
@@ -68,7 +68,7 @@
 										<button type="submit" name="typeAction" value="update"
 											class="btn btn-success">Modifier l'enquête</button>
 										<input type="hidden" name="typeSurvey"
-											value="${survey.getClass().simpleName eq 'SurveyPhone' ? "surveyPhone" : "surveyInternet"}">
+											value="${survey.getClass().simpleName eq 'SurveyPhone' ? 'surveyPhone': 'surveyInternet'}">
 										<input type="hidden" name="idSurvey" value="${survey.id}">
 										<button type="button" class="btn btn-warning"
 											data-toggle="modal"
@@ -100,7 +100,7 @@
 													 name="typeAction" value="delete">Supprimer</button>
 													<input type="hidden" name="idSurvey" value="${survey.id}">
 													<input type="hidden" name="typeSurvey"
-														value="${survey.getClass().simpleName eq 'SurveyPhone' ? "surveyPhone" : "surveyInternet"}">
+														value="${survey.getClass().simpleName eq 'SurveyPhone' ? 'surveyPhone' : 'surveyInternet'}">
 													<button type="button" class="btn btn-primary"
 														data-dismiss="modal">Annuler</button>
 												</form>

@@ -39,7 +39,7 @@
 			<p class="navbar-text">Nombre total d'enquête(s):
 				${surveys.size()}</p>
 		</nav>
-		<div class="container-fluid">	
+		<div class="container-fluid">
 			<h1>Liste des Enquetes</h1>
 			<c:forEach var="survey" items="${surveys}">
 				<div class="panel panel-default">
@@ -68,7 +68,7 @@
 										<button type="submit" name="typeAction" value="update"
 											class="btn btn-success">Modifier l'enquête</button>
 										<input type="hidden" name="typeSurvey"
-											value="${survey.getClass().simpleName eq 'SurveyPhone' ? 'surveyPhone': 'surveyInternet'}">
+											value="${survey.getClass().simpleName eq 'SurveyPhone' ? "surveyPhone" : "surveyInternet"}">
 										<input type="hidden" name="idSurvey" value="${survey.id}">
 										<button type="button" class="btn btn-warning"
 											data-toggle="modal"
@@ -81,7 +81,8 @@
 
 								<div
 									class="modal fade modal-delete-survey${survey.id} text-left"
-									tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel${survey.id}">
+									tabindex="-1" role="dialog"
+									aria-labelledby="mySmallModalLabel${survey.id}">
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
@@ -97,10 +98,10 @@
 											<div class="modal-footer">
 												<form action="SurveysServlet" method="post">
 													<button type="submit" class="btn btn-default"
-													 name="typeAction" value="delete">Supprimer</button>
+														name="typeAction" value="delete">Supprimer</button>
 													<input type="hidden" name="idSurvey" value="${survey.id}">
 													<input type="hidden" name="typeSurvey"
-														value="${survey.getClass().simpleName eq 'SurveyPhone' ? 'surveyPhone' : 'surveyInternet'}">
+														value="${survey.getClass().simpleName eq 'SurveyPhone' ? "surveyPhone" : "surveyInternet"}">
 													<button type="button" class="btn btn-primary"
 														data-dismiss="modal">Annuler</button>
 												</form>
@@ -141,13 +142,67 @@
 								<div id="collapse${survey.id}" class="panel-collapse collapse"
 									role="tabpanel" aria-labelledby="heading${survey.id}">
 									<div class="list-group">
-										<a href="QuestionAddServlet?idSurvey=${survey.id}"
+										<a href="#" data-toggle="modal"
+											data-target=".modal-add-question${survey.id}"
 											class="list-group-item list-group-item-info text-center">Ajouter
 											une question</a>
+
+										<div
+											class="modal fade modal-add-question${survey.id} text-left"
+											tabindex="-1" role="dialog"
+											aria-labelledby="mySmallModalLabel${survey.id}">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+														<h4 class="modal-title">Ajouter une question</h4>
+													</div>
+													<div class="modal-body">
+														<%@ include file="ajoutQuestion.jsp"%>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-primary"
+															data-dismiss="modal">Annuler</button>
+													</div>
+												</div>
+												<!-- /.modal-content -->
+											</div>
+											<!-- /.modal-dialog -->
+										</div>
+										<!-- /.modal -->
 										<c:forEach var="question" items="${survey.lsQuestion}">
-											<a
-												href="QuestionUpdateServlet?idSurvey=${survey.id}&idQuestion=${question.id}"
+											<a href="#" data-toggle="modal"
+												data-target=".modal-modify-question${question.id}"
 												class="list-group-item">${question.wording} </a>
+											<div
+												class="modal fade modal-modify-question${question.id} text-left"
+												tabindex="-1" role="dialog"
+												aria-labelledby="mySmallModalLabel${question.id}">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal"
+																aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+															<h4 class="modal-title">Modifier une question</h4>
+														</div>
+														<div class="modal-body">
+															<%@ include file="modifieQuestion.jsp"%>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-primary"
+																data-dismiss="modal">Annuler</button>
+														</div>
+													</div>
+													<!-- /.modal-content -->
+												</div>
+												<!-- /.modal-dialog -->
+											</div>
+											<!-- /.modal -->
 										</c:forEach>
 									</div>
 								</div>
