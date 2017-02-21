@@ -19,7 +19,7 @@
 				<input type="text" name="price" placeholder="Entrez le prix de l'enquête" value="${survey.price}" required>
 			</label><br>
 			<label> Date :
-				<input type="date" name="date" required>
+				<input type="date" name="date" value="${survey.date}" required>
 			</label><br>
 			<c:if test="${typeSurvey eq 'surveyPhone'}">
 				<label>Script :<br>
