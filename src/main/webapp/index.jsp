@@ -39,7 +39,7 @@
 			<p class="navbar-text">Nombre total d'enquête(s):
 				${surveys.size()}</p>
 		</nav>
-		<div class="container-fluid">	
+		<div class="container-fluid">
 			<h1>Liste des Enquetes</h1>
 			<c:forEach var="survey" items="${surveys}">
 				<div class="panel panel-default">
@@ -81,7 +81,8 @@
 
 								<div
 									class="modal fade modal-delete-survey${survey.id} text-left"
-									tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel${survey.id}">
+									tabindex="-1" role="dialog"
+									aria-labelledby="mySmallModalLabel${survey.id}">
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
@@ -97,7 +98,7 @@
 											<div class="modal-footer">
 												<form action="SurveysServlet" method="post">
 													<button type="submit" class="btn btn-default"
-													 name="typeAction" value="delete">Supprimer</button>
+														name="typeAction" value="delete">Supprimer</button>
 													<input type="hidden" name="idSurvey" value="${survey.id}">
 													<input type="hidden" name="typeSurvey"
 														value="${survey.getClass().simpleName eq 'SurveyPhone' ? 'surveyPhone' : 'surveyInternet'}">
@@ -129,21 +130,53 @@
 						</c:if>
 						<div class="panel-group" role="tablist">
 							<div class="panel panel-default">
-								<div class="panel-heading text-center" role="tab"
-									id="heading${survey.id}">
-									<h4 class="panel-title">
-										<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-										<a class="collapsed" role="button" data-toggle="collapse"
-											href="#collapse${survey.id}" aria-expanded="false"
-											aria-controls="collapse${survey.id}"> Questions </a>
-									</h4>
-								</div>
+								<a class="collapsed" role="button" data-toggle="collapse"
+									href="#collapse${survey.id}" aria-expanded="false"
+									aria-controls="collapse${survey.id}">
+									<div class="panel-heading text-center" role="tab"
+										id="heading${survey.id}">
+										<h4 class="panel-title">
+											<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+											Questions
+
+										</h4>
+									</div>
+								</a>
 								<div id="collapse${survey.id}" class="panel-collapse collapse"
-									role="tabpanel" aria-labelledby="heading${survey.id}">
+									role="tabpanel" aria-expanded="false"
+									aria-labelledby="heading${survey.id}">
 									<div class="list-group">
-										<a href="QuestionAddServlet?idSurvey=${survey.id}"
+										<a href="#" data-toggle="modal"
+											data-target=".modal-add-question${survey.id}"
 											class="list-group-item list-group-item-info text-center">Ajouter
 											une question</a>
+
+										<div
+											class="modal fade modal-add-question${survey.id} text-left"
+											tabindex="-1" role="dialog"
+											aria-labelledby="mySmallModalLabel${survey.id}">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+														<h4 class="modal-title">Ajouter une question</h4>
+													</div>
+													<div class="modal-body">
+														<%@ include file="ajoutQuestion.jsp"%>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-primary"
+															data-dismiss="modal">Annuler</button>
+													</div>
+												</div>
+												<!-- /.modal-content -->
+											</div>
+											<!-- /.modal-dialog -->
+										</div>
+										<!-- /.modal -->
 										<c:forEach var="question" items="${survey.lsQuestion}">
 											<a
 												href="QuestionUpdateServlet?idSurvey=${survey.id}&idQuestion=${question.id}"

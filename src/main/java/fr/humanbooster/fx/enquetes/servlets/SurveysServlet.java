@@ -1,7 +1,6 @@
 package fr.humanbooster.fx.enquetes.servlets;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -9,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.humanbooster.fx.enquetes.business.Survey;
 import fr.humanbooster.fx.enquetes.service.QuestionService;
@@ -40,6 +40,23 @@ public class SurveysServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
+		Object objQ = session.getAttribute("newQ");
+		Object objS = session.getAttribute("newS");
+		int newQ = -1;
+		int newS = -1;
+		if(objQ != null) {
+			newQ = (Integer)objQ;
+			if(newQ == 1) {
+				session.setAttribute("newQ", 0);
+			}
+		}
+		if(objS != null) {
+			newQ = (Integer)objS;
+			if(newS == 1) {
+				session.setAttribute("newS", 0);
+			}
+		}
 		response.setCharacterEncoding("UTF-8");
 		Set<Survey> surveys = ss.findAllSurvey();
 		request.setAttribute("surveys", surveys);
