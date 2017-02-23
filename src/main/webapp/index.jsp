@@ -7,17 +7,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
+<link rel="stylesheet" href="css/bootstrap.min.css">
 <script src="js/jquery-3.1.1.min.js">
 	
 </script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>
+<script src="js/bootstrap.min.js">
+	
+</script>
+<script src="js/npm.js">
+	
+</script>
 <title>Liste des Enquetes</title>
 </head>
 <body>
@@ -42,6 +41,65 @@
 		<div class="container-fluid">
 			<h1>Liste des Enquetes</h1>
 			<c:forEach var="survey" items="${surveys}">
+				<div class="modal fade modal-delete-survey${survey.id} text-left"
+					tabindex="-1" role="dialog"
+					aria-labelledby="mySmallModalLabel${survey.id}">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title">Suppression de l'enquête</h4>
+							</div>
+							<div class="modal-body">
+								<p>Voulez-vous vraiment supprimer ${survey.name}?</p>
+							</div>
+							<div class="modal-footer">
+								<form action="SurveysServlet" method="post">
+									<button type="submit" class="btn btn-default" name="typeAction"
+										value="delete">Supprimer</button>
+									<input type="hidden" name="idSurvey" value="${survey.id}">
+									<input type="hidden" name="typeSurvey"
+										value="${survey.getClass().simpleName eq 'SurveyPhone' ? 'surveyPhone' : 'surveyInternet'}">
+									<button type="button" class="btn btn-primary"
+										data-dismiss="modal">Annuler</button>
+								</form>
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+
+				<div class="modal fade modal-add-question${survey.id} text-left"
+					tabindex="-1" role="dialog"
+					aria-labelledby="mySmallModalLabel${survey.id}">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title">Ajouter une question</h4>
+							</div>
+							<div class="modal-body">
+								<%@ include file="ajoutQuestion.jsp"%>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary"
+									data-dismiss="modal">Annuler</button>
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="row">
@@ -78,41 +136,6 @@
 										</button>
 									</div>
 								</form>
-
-								<div
-									class="modal fade modal-delete-survey${survey.id} text-left"
-									tabindex="-1" role="dialog"
-									aria-labelledby="mySmallModalLabel${survey.id}">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal"
-													aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-												<h4 class="modal-title">Suppression de l'enquête</h4>
-											</div>
-											<div class="modal-body">
-												<p>Voulez-vous vraiment supprimer ${survey.name}?</p>
-											</div>
-											<div class="modal-footer">
-												<form action="SurveysServlet" method="post">
-													<button type="submit" class="btn btn-default"
-														name="typeAction" value="delete">Supprimer</button>
-													<input type="hidden" name="idSurvey" value="${survey.id}">
-													<input type="hidden" name="typeSurvey"
-														value="${survey.getClass().simpleName eq 'SurveyPhone' ? 'surveyPhone' : 'surveyInternet'}">
-													<button type="button" class="btn btn-primary"
-														data-dismiss="modal">Annuler</button>
-												</form>
-											</div>
-										</div>
-										<!-- /.modal-content -->
-									</div>
-									<!-- /.modal-dialog -->
-								</div>
-								<!-- /.modal -->
-
 								<br> prix <strong>${survey.price}</strong> € HT
 							</div>
 						</div>
@@ -150,33 +173,6 @@
 											data-target=".modal-add-question${survey.id}"
 											class="list-group-item list-group-item-info text-center">Ajouter
 											une question</a>
-
-										<div
-											class="modal fade modal-add-question${survey.id} text-left"
-											tabindex="-1" role="dialog"
-											aria-labelledby="mySmallModalLabel${survey.id}">
-											<div class="modal-dialog" role="document">
-												<div class="modal-content">
-													<div class="modal-header">
-														<button type="button" class="close" data-dismiss="modal"
-															aria-label="Close">
-															<span aria-hidden="true">&times;</span>
-														</button>
-														<h4 class="modal-title">Ajouter une question</h4>
-													</div>
-													<div class="modal-body">
-														<%@ include file="ajoutQuestion.jsp"%>
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-primary"
-															data-dismiss="modal">Annuler</button>
-													</div>
-												</div>
-												<!-- /.modal-content -->
-											</div>
-											<!-- /.modal-dialog -->
-										</div>
-										<!-- /.modal -->
 										<c:forEach var="question" items="${survey.lsQuestion}">
 											<a
 												href="QuestionUpdateServlet?idSurvey=${survey.id}&idQuestion=${question.id}"
