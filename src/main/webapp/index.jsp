@@ -73,33 +73,6 @@
 					<!-- /.modal-dialog -->
 				</div>
 				<!-- /.modal -->
-
-				<div class="modal fade modal-add-question${survey.id} text-left"
-					tabindex="-1" role="dialog"
-					aria-labelledby="mySmallModalLabel${survey.id}">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-								<h4 class="modal-title">Ajouter une question</h4>
-							</div>
-							<div class="modal-body">
-								<%@ include file="ajoutQuestion.jsp"%>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-primary"
-									data-dismiss="modal">Annuler</button>
-							</div>
-						</div>
-						<!-- /.modal-content -->
-					</div>
-					<!-- /.modal-dialog -->
-				</div>
-				<!-- /.modal -->
-
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="row">
@@ -148,7 +121,6 @@
 									<span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span><cite
 										title="Source Title"> Accroche téléphonique</cite>
 								</footer>
-
 							</blockquote>
 						</c:if>
 						<div class="panel-group" role="tablist">
@@ -161,7 +133,6 @@
 										<h4 class="panel-title">
 											<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
 											Questions
-
 										</h4>
 									</div>
 								</a>
@@ -169,8 +140,7 @@
 									role="tabpanel" aria-expanded="false"
 									aria-labelledby="heading${survey.id}">
 									<div class="list-group">
-										<a href="#" data-toggle="modal"
-											data-target=".modal-add-question${survey.id}"
+										<a href="QuestionAddServlet?idSurvey=${survey.id}"
 											class="list-group-item list-group-item-info text-center">Ajouter
 											une question</a>
 										<c:forEach var="question" items="${survey.lsQuestion}">
@@ -186,7 +156,6 @@
 				</div>
 			</c:forEach>
 			<br> <br>
-
 		</div>
 	</div>
 </body>
