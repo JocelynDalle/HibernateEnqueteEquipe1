@@ -26,11 +26,47 @@
 		<form action="QuestionUpdateServlet"
 			method="post">
 			<input name="idQuestion" type="hidden" value="${question.id}">
+			<input name="idSurvey" type="hidden" value="${survey.id}">
 			<label>Libellé de la question</label> <br>
 			<textarea class="form-control" rows="3" name="wording" required>${question.wording}</textarea>
-			<button type="submit">Modifier</button>
-
+			<button type="submit" name="typeAction" class="btn btn-small btn-danger" value="update">Modifier</button>
+			<button type="button" class="btn btn-small btn-danger"
+												data-toggle="modal"
+												data-target=".modal-delete-question">
+												Supprimer
+											</button>
 		</form>
+		
+		<div class="modal fade modal-delete-question text-left"
+						tabindex="-1" role="dialog"
+						aria-labelledby="mySmallModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h4 class="modal-title">Suppression de la question</h4>
+								</div>
+								<div class="modal-body">
+									<p>Voulez-vous vraiment supprimer <strong>'${question.wording}'</strong> ?</p>
+								</div>
+								<div class="modal-footer">
+									<form action="QuestionUpdateServlet" method="post">
+										<button type="submit" class="btn btn-default"
+											name="typeAction" value="delete">Supprimer</button>
+										<input name="idQuestion" type="hidden" value="${question.id}">
+										<button type="button" class="btn btn-primary"
+											data-dismiss="modal">Annuler</button>
+									</form>
+								</div>
+							</div>
+							<!-- /.modal-content -->
+						</div>
+						<!-- /.modal-dialog -->
+					</div>
+					<!-- /.modal -->
 	</div>
 </body>
 </html>

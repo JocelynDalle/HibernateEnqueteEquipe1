@@ -7,7 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import fr.humanbooster.fx.enquetes.business.Question;
 import fr.humanbooster.fx.enquetes.business.Survey;
 import fr.humanbooster.fx.enquetes.service.QuestionService;
 import fr.humanbooster.fx.enquetes.service.SurveyService;
@@ -56,7 +58,11 @@ public class QuestionAddServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		String idSurvey = request.getParameter("idSurvey");
 		String wording = request.getParameter("wording");
-		qs.addQuestionToSurvey(wording, idSurvey);
+		Question question = qs.addQuestionToSurvey(wording, idSurvey);
+		HttpSession session = request.getSession(true);
+		session.setAttribute("newQ", 1);
+		session.setAttribute("idNewQ", question.getId());
+		session.setAttribute("idSurvey", idSurvey);
 		response.sendRedirect("index");
 //		request.getRequestDispatcher("index").forward(request, response);
 	}

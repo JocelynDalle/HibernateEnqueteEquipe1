@@ -43,17 +43,29 @@ public class SurveysServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Object objQ = session.getAttribute("newQ");
 		Object objS = session.getAttribute("newS");
+		Object objIdS = session.getAttribute("idSurvey");
 		int newQ = -1;
 		int newS = -1;
-		if(objQ != null) {
+		String idSurvey = "";
+		String idNewQ = "";
+		if(objQ != null && objIdS != null) {
 			newQ = (Integer)objQ;
 			if(newQ == 1) {
+				request.setAttribute("newQ", 1);
+				idNewQ = String.valueOf(session.getAttribute("idNewQ"));
+				idSurvey = (String)session.getAttribute("idSurvey");
+				request.setAttribute("idNewQ", idNewQ);
+				request.setAttribute("idSurvey", idSurvey);
 				session.setAttribute("newQ", 0);
+				System.out.println("idSurvey = " + idSurvey);
 			}
 		}
 		if(objS != null) {
-			newQ = (Integer)objS;
+			newS = (Integer)objS;
 			if(newS == 1) {
+				request.setAttribute("newS", 1);
+				int idNewS = Integer.valueOf((String)session.getAttribute("idNewS"));
+				request.setAttribute("idNewS", idNewS);
 				session.setAttribute("newS", 0);
 			}
 		}
