@@ -29,8 +29,8 @@
 			<input name="idSurvey" type="hidden" value="${survey.id}">
 			<label>Libellé de la question</label> <br>
 			<textarea class="form-control" rows="3" name="wording" required>${question.wording}</textarea>
-			<button type="submit" name="typeAction" class="btn btn-small btn-danger" value="update">Modifier</button>
-			<button type="button" class="btn btn-small btn-danger"
+			<button type="submit" name="typeAction" class="btn btn-sm btn-success" value="update">Modifier</button>
+			<button type="button" class="btn btn-sm btn-danger"
 												data-toggle="modal"
 												data-target=".modal-delete-question">
 												Supprimer

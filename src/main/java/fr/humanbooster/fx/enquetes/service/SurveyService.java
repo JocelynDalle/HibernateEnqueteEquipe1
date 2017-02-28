@@ -1,5 +1,6 @@
 package fr.humanbooster.fx.enquetes.service;
 
+import java.util.Date;
 import java.util.Set;
 
 import fr.humanbooster.fx.enquetes.business.Survey;
@@ -19,4 +20,7 @@ public interface SurveyService {
 	public SurveyInternet createSurveyInternet(SurveyInternet surveyInternet);
 	
 	public SurveyPhone createSurveyPhone(SurveyPhone surveyPhone);
+	
+	public Set<Survey> filterSurveys(String name, Date start, Date end);
+	
 }

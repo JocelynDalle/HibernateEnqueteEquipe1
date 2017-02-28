@@ -1,5 +1,6 @@
 package fr.humanbooster.fx.enquetes.service.impl;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -16,12 +17,12 @@ import fr.humanbooster.fx.enquetes.dao.impl.QuestionDaoImpl;
 import fr.humanbooster.fx.enquetes.dao.impl.SurveyDaoImpl;
 import fr.humanbooster.fx.enquetes.service.SurveyService;
 
-public class SurveyServiceImpl implements SurveyService{
+public class SurveyServiceImpl implements SurveyService {
 
 	private SurveyDao sDao = new SurveyDaoImpl();
 	private QuestionDao qDao = new QuestionDaoImpl();
-	private CriteriaDao cDao = new CriteriaDaoImpl(); 
-	
+	private CriteriaDao cDao = new CriteriaDaoImpl();
+
 	@Override
 	public Survey modifySurvey(Survey survey) {
 		sDao.openCurrentSessionWithTransaction();
@@ -29,7 +30,6 @@ public class SurveyServiceImpl implements SurveyService{
 		sDao.closeCurrentSessionwithTransaction();
 		return s;
 	}
-
 
 	@Override
 	public Boolean deleteSurvey(int idSurvey) {
@@ -40,13 +40,13 @@ public class SurveyServiceImpl implements SurveyService{
 		Survey survey = sDao.findById(idSurvey);
 		Set<Question> questions;
 		Set<Criteria> criterias;
-		if(survey != null) {
+		if (survey != null) {
 			questions = survey.getLsQuestion();
 			criterias = survey.getSetCriteria();
-			for(Question q : questions) {
+			for (Question q : questions) {
 				qDao.deleteQuestion(q.getId());
 			}
-			for(Criteria c : criterias) {
+			for (Criteria c : criterias) {
 				cDao.deleteCriteria(c.getId());
 			}
 			result = sDao.deleteSurvey(idSurvey);
@@ -65,7 +65,6 @@ public class SurveyServiceImpl implements SurveyService{
 		return s;
 	}
 
-
 	@Override
 	public Survey findById(int idSurvey) {
 		sDao.openCurrentSessionWithTransaction();
@@ -73,7 +72,7 @@ public class SurveyServiceImpl implements SurveyService{
 		sDao.closeCurrentSessionwithTransaction();
 		return survey;
 	}
-	
+
 	@Override
 	public SurveyInternet createSurveyInternet(SurveyInternet surveyInternet) {
 		sDao.openCurrentSessionWithTransaction();
@@ -82,13 +81,75 @@ public class SurveyServiceImpl implements SurveyService{
 		return _surveyInternet;
 	}
 
-
 	@Override
 	public SurveyPhone createSurveyPhone(SurveyPhone surveyPhone) {
 		sDao.openCurrentSessionWithTransaction();
 		SurveyPhone _surveyPhone = (SurveyPhone) sDao.createSurvey(surveyPhone);
 		sDao.closeCurrentSessionwithTransaction();
 		return _surveyPhone;
+	}
+
+	@Override
+	public Set<Survey> filterSurveys(String name, Date start, Date end) {
+		sDao.openCurrentSessionWithTransaction();
+		Set<Survey> filtered = new TreeSet<>();
+		Set<Survey> surveys = sDao.findAll();
+		for (Survey survey : surveys) {
+			if (name == null) {
+				if (start != null && end != null) {
+					if (survey.getDate().after(start) && survey.getDate().before(end)) {
+						filtered.add(survey);
+					}
+				} else if (start != null) {
+					if (survey.getDate().after(start)) {
+						filtered.add(survey);
+					}
+				} else if (end != null) {
+					if (survey.getDate().before(end)) {
+						filtered.add(survey);
+					}
+				} else {
+					filtered.add(survey);
+				}
+			} else if (!name.equals("")) {
+				if (start != null && end != null) {
+					if (survey.getName().contains(name) && survey.getDate().after(start)
+							&& survey.getDate().before(end)) {
+						filtered.add(survey);
+					}
+				} else if (start != null) {
+					if (survey.getName().contains(name) && survey.getDate().after(start)) {
+						filtered.add(survey);
+					}
+				} else if (end != null) {
+					if (survey.getName().contains(name) && survey.getDate().before(end)) {
+						filtered.add(survey);
+					}
+				} else {
+					if (survey.getName().contains(name)) {
+						filtered.add(survey);
+					}
+				}
+			} else {
+				if (start != null && end != null) {
+					if (survey.getDate().after(start) && survey.getDate().before(end)) {
+						filtered.add(survey);
+					}
+				} else if (start != null) {
+					if (survey.getDate().after(start)) {
+						filtered.add(survey);
+					}
+				} else if (end != null) {
+					if (survey.getDate().before(end)) {
+						filtered.add(survey);
+					}
+				} else {
+					filtered.add(survey);
+				}
+			}
+		}
+		sDao.closeCurrentSessionwithTransaction();
+		return filtered;
 	}
 
 }
