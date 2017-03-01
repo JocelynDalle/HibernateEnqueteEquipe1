@@ -1,6 +1,7 @@
 package fr.humanbooster.fx.enquetes.servlets;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -70,6 +71,8 @@ public class SurveysServlet extends HttpServlet {
 			}
 		}
 		response.setCharacterEncoding("UTF-8");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		request.setAttribute("sdf", sdf);
 		Set<Survey> surveys = ss.findAllSurvey();
 		request.setAttribute("surveys", surveys);
 		request.getRequestDispatcher("index.jsp").forward(request, response);

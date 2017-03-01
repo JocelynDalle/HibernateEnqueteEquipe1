@@ -31,24 +31,12 @@
 <body
 	onload="${newQ != null ? newQ == 1 ? 'expandQuestions()' : '' : ''}">
 	<div class="container">
+
 		<nav class="navbar navbar-survey navbar-default navbar-fixed-bottom">
 			<div class="navbar-header">
 				<p class="navbar-text">Nombre total d'enquête(s):
 					${surveys.size()}</p>
 			</div>
-			<p class="navbar-text">
-				<c:if test="${nameFilter != null || nameFilter.equals('')}">
-					<u><em>contenant :</em></u>&nbsp;<strong>${nameFilter}</strong>
-				</c:if>
-				<c:if test="${startDate != null}">
-					<u><em>après le :</em></u>&nbsp;
-					<strong>${startDate}</strong>
-				</c:if>
-				<c:if test="${endDate != null}">
-					<u><em>avant le :</em></u>&nbsp;
-					<strong>${endDate}</strong>
-				</c:if>
-			</p>
 			<p class="navbar-right">
 				<a href="SurveyServlet?typeAction=create&typeSurvey=surveyPhone">
 					<button type="submit" class="btn btn-primary navbar-btn">
@@ -64,10 +52,13 @@
 				</a> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			</p>
 		</nav>
+
 		<h1 id="top">Liste des Enquetes</h1>
+
 		<c:if test="${newQ != null ? newQ == 1 ? true : false : false}">
 			<a id="gotoSurvey" href="#survey${idSurvey}"></a>
 		</c:if>
+
 		<h4>
 			<form action="FilterServlet" method="post"
 				class="form-inline text-center">
@@ -91,6 +82,22 @@
 				<button type="submit" class="btn btn-default">Filtrer</button>
 			</form>
 		</h4>
+
+		<h4 class="text-center">
+			<c:if test="${nameFilter != null || nameFilter.equals('')}">
+				<em>contenant : </em>
+				<span class="label label-info">'${nameFilter}'</span>&nbsp;&nbsp;&nbsp;
+			</c:if>
+			<c:if test="${startDate != null}">
+				<em>après le : </em>
+				<span class="label label-info">${startDate}</span>&nbsp;&nbsp;&nbsp;
+			</c:if>
+			<c:if test="${endDate != null}">
+				<em>avant le : </em>
+				<span class="label label-info">${endDate}</span>
+			</c:if>
+		</h4>
+
 		<div class="row">
 			<div class="col-md-2 col-sm-1 col-xs-0"></div>
 			<div class="col-md-8 col-sm-10 col-xs-12">
@@ -147,7 +154,7 @@
 									${survey.getClass().simpleName eq 'SurveyPhone' ? "Enquête téléphonique" : "Enquête internet"}
 								</div>
 								<div class="col-md-4 text-center">
-									<em>Plannifi&eacute;e le:</em> <strong>${survey.date}</strong>
+									<em>Plannifi&eacute;e le:</em> <strong>${survey.formatDate}</strong>
 								</div>
 								<div class="col-md-4 text-right">
 									<form action="SurveysServlet" method="post">
@@ -179,6 +186,15 @@
 											title="Source Title"> Accroche téléphonique</cite>
 									</footer>
 								</blockquote>
+							</c:if>
+							<c:if test="${survey.getClass().simpleName eq 'SurveyInternet'}">
+								<h4 class="partner">
+									<label>Sites partenaires :</label>
+									<c:forEach var="partner" items="${survey.lsPartnerSite}">
+										<a href="${partner.url}"><button type="button"
+												class="btn btn-warning">${partner.name}</button></a>
+									</c:forEach>
+								</h4>
 							</c:if>
 							<div class="panel-group" role="tablist">
 								<div class="panel panel-default panel-question">

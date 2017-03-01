@@ -77,8 +77,8 @@ public class FilterServlet extends HttpServlet {
 			surveys = ss.filterSurveys(nameFilter, null, null);
 		}
 		request.setAttribute("nameFilter", nameFilter);
-		request.setAttribute("startDate", startDate);
-		request.setAttribute("endDate", endDate);
+		request.setAttribute("startDate", DateFormat.getDateInstance( DateFormat.MEDIUM ).format(startDate));
+		request.setAttribute("endDate", DateFormat.getDateInstance( DateFormat.MEDIUM ).format(endDate));
 		request.setAttribute("surveys", surveys);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}

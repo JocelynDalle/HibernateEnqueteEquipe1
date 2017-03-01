@@ -1,5 +1,6 @@
 package fr.humanbooster.fx.enquetes.business;
 
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.Set;
 
@@ -11,8 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
-
-import org.hibernate.annotations.ColumnDefault;
+import javax.persistence.Transient;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -26,6 +26,10 @@ public abstract class Survey implements Comparable<Survey> {
 	private String name;
 	private float price;
 	private Date date;
+	
+	@Transient
+	private String formatDate;
+	
 	@OneToMany(mappedBy = "survey", fetch=FetchType.EAGER)
 	private Set<Criteria> setCriteria;
 
@@ -86,6 +90,8 @@ public abstract class Survey implements Comparable<Survey> {
 				+ setCriteria + "]";
 	}
 
-
+	public String getFormatDate() {
+		return DateFormat.getDateInstance( DateFormat.MEDIUM ).format(date);
+	}
 
 }
