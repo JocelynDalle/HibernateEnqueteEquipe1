@@ -59,7 +59,7 @@
 			<a id="gotoSurvey" href="#survey${idSurvey}"></a>
 		</c:if>
 
-		<h4>
+		<h5>
 			<form action="FilterServlet" method="post"
 				class="form-inline text-center">
 				<div class="form-group"></div>
@@ -78,22 +78,27 @@
 					<label for="fin"><span class="glyphicon glyphicon-calendar"
 						aria-hidden="true"></span>Fin</label> <input id="fin" type="date"
 						name="endDate" class="form-control" placeholder="jj/mm/aaaa">
+					<button type="submit" class="btn btn-info">Filtrer</button>
 				</div>
-				<button type="submit" class="btn btn-default">Filtrer</button>
+
 			</form>
-		</h4>
+		</h5>
 
 		<h4 class="text-center">
 			<c:if test="${nameFilter != null || nameFilter.equals('')}">
-				<em>contenant : </em>
+				<strong>Nom :</strong>
 				<span class="label label-info">'${nameFilter}'</span>&nbsp;&nbsp;&nbsp;
 			</c:if>
+			<c:if test="${startDate != null || endDate != null}">
+				<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+				<strong> :</strong>
+			</c:if>
 			<c:if test="${startDate != null}">
-				<em>après le : </em>
+				<span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
 				<span class="label label-info">${startDate}</span>&nbsp;&nbsp;&nbsp;
 			</c:if>
 			<c:if test="${endDate != null}">
-				<em>avant le : </em>
+				<span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
 				<span class="label label-info">${endDate}</span>
 			</c:if>
 		</h4>
@@ -194,7 +199,52 @@
 										<a href="${partner.url}"><button type="button"
 												class="btn btn-warning">${partner.name}</button></a>
 									</c:forEach>
+									<a href="PartnerSiteServlet?idSurvey=${survey.id}">
+										<button type="button" class="btn btn-primary" name="idSurvey">
+											<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+										</button>
+									</a>
 								</h4>
+								<div class="modal fade modal-addPartner${survey.id} text-left"
+									tabindex="-1" role="dialog"
+									aria-labelledby="addPartnerSmallModalLabel${survey.id}">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+												<h4 class="modal-title">Ajouter un site partenaire</h4>
+											</div>
+											<div class="modal-body">
+												<h5>${survey.name}</h5>
+												<form action="AddPartnerServlet" method="post">
+													<div class="form-group">
+														<label>Nom : </label><input type="text" name="name"
+															class="form-control"
+															placeholder="Entrez le nom du site partenaire" required>
+													</div>
+													<div class="form-group">
+														<label> Url : </label><input type="text" name="url"
+															class="form-control"
+															placeholder="Entrez l'url du site partenaire" required>
+														<br>
+														<button type="submit" class="btn btn-default">Ajouter</button>
+													</div>
+												</form>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-primary"
+													data-dismiss="modal">Annuler</button>
+											</div>
+										</div>
+										<!-- /.modal-content -->
+									</div>
+									<!-- /.modal-dialog -->
+								</div>
+								<!-- /.modal -->
+
 							</c:if>
 							<div class="panel-group" role="tablist">
 								<div class="panel panel-default panel-question">

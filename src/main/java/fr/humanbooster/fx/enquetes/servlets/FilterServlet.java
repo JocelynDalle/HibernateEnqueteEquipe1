@@ -54,15 +54,21 @@ public class FilterServlet extends HttpServlet {
 		Date endDate = null;
 		try {
 			startDate = sdf.parse(startDateStr);
+			request.setAttribute("startDate", DateFormat.getDateInstance( DateFormat.MEDIUM ).format(startDate));
 		} catch (ParseException e) {
 			System.out.println("Date de début non parsable");
 //			e.printStackTrace();
+		} catch (NullPointerException npe) {
+			System.out.println("startDate est null");
 		}
 		try {
 			endDate = sdf.parse(endDateStr);
+			request.setAttribute("endDate", DateFormat.getDateInstance( DateFormat.MEDIUM ).format(endDate));
 		} catch (ParseException e) {
 			System.out.println("Date de fin non parsable");
 //			e.printStackTrace();
+		} catch (NullPointerException npe) {
+			System.out.println("endDate est null");
 		}
 		System.out.println("date de début = " + startDate);
 		System.out.println("name filter = " + nameFilter);
@@ -76,9 +82,9 @@ public class FilterServlet extends HttpServlet {
 		} else {
 			surveys = ss.filterSurveys(nameFilter, null, null);
 		}
-		request.setAttribute("nameFilter", nameFilter);
-		request.setAttribute("startDate", DateFormat.getDateInstance( DateFormat.MEDIUM ).format(startDate));
-		request.setAttribute("endDate", DateFormat.getDateInstance( DateFormat.MEDIUM ).format(endDate));
+		if (!nameFilter.equals("")) {
+			request.setAttribute("nameFilter", nameFilter);
+		}
 		request.setAttribute("surveys", surveys);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}

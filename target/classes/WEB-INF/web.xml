@@ -49,4 +49,16 @@
     <servlet-name>QuestionAddServlet</servlet-name>
     <url-pattern>/ajoutQuestion</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>AddPartnerServlet</servlet-name>
+    <servlet-class>fr.humanbooster.fx.enquetes.servlets.AddPartnerServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>PartnerSiteServlet</servlet-name>
+    <servlet-class>fr.humanbooster.fx.enquetes.servlets.PartnerSiteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PartnerSiteServlet</servlet-name>
+    <url-pattern>/modifieSitesPartenaires</url-pattern>
+  </servlet-mapping>
 </web-app>

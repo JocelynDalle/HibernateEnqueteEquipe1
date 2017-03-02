@@ -87,7 +87,10 @@ public class SurveysServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		String typeAction = request.getParameter("typeAction");
 		String typeSurvey = request.getParameter("typeSurvey");
-		int idSurvey = Integer.valueOf(request.getParameter("idSurvey"));
+		int idSurvey = -1;
+		if(request.getParameter("idSurvey") != null) {
+			idSurvey = Integer.valueOf(request.getParameter("idSurvey"));
+		}
 		if (typeAction != null && typeSurvey != null) {
 			if (typeAction.equals("update")) {
 				request.setAttribute("typeAction", typeAction);
