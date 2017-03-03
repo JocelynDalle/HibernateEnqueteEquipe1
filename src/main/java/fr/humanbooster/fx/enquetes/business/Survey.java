@@ -21,20 +21,20 @@ public abstract class Survey implements Comparable<Survey> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
-	private int id;
-	private String name;
-	private float price;
-	private Date date;
+	protected int id;
+	
+	protected String name;
+	protected float price;
+	protected Date date;
 	
 	@Transient
-	private String formatDate;
+	protected String formatDate;
 	
 	@OneToMany(mappedBy = "survey", fetch=FetchType.EAGER)
-	private Set<Criteria> setCriteria;
+	protected Set<Criteria> setCriteria;
 
 	@OneToMany(mappedBy="survey", fetch=FetchType.EAGER)
-	private Set<Question> lsQuestion;
+	protected Set<Question> lsQuestion;
 	
 	public int getId() {
 		return id;

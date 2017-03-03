@@ -199,7 +199,7 @@
 										<a href="${partner.url}"><button type="button"
 												class="btn btn-warning">${partner.name}</button></a>
 									</c:forEach>
-									<a href="PartnerSiteServlet?idSurvey=${survey.id}">
+									<a href="AddPartnerServlet?idSurvey=${survey.id}">
 										<button type="button" class="btn btn-primary" name="idSurvey">
 											<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 										</button>

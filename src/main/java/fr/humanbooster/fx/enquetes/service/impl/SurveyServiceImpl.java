@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import fr.humanbooster.fx.enquetes.business.Criteria;
+import fr.humanbooster.fx.enquetes.business.PartnerSite;
 import fr.humanbooster.fx.enquetes.business.Question;
 import fr.humanbooster.fx.enquetes.business.Survey;
 import fr.humanbooster.fx.enquetes.business.SurveyInternet;
@@ -15,6 +16,7 @@ import fr.humanbooster.fx.enquetes.dao.SurveyDao;
 import fr.humanbooster.fx.enquetes.dao.impl.CriteriaDaoImpl;
 import fr.humanbooster.fx.enquetes.dao.impl.QuestionDaoImpl;
 import fr.humanbooster.fx.enquetes.dao.impl.SurveyDaoImpl;
+import fr.humanbooster.fx.enquetes.service.PartenerSiteService;
 import fr.humanbooster.fx.enquetes.service.SurveyService;
 
 public class SurveyServiceImpl implements SurveyService {
@@ -22,6 +24,7 @@ public class SurveyServiceImpl implements SurveyService {
 	private SurveyDao sDao = new SurveyDaoImpl();
 	private QuestionDao qDao = new QuestionDaoImpl();
 	private CriteriaDao cDao = new CriteriaDaoImpl();
+	private PartenerSiteService pss = new PartenerSiteServiceImpl();
 
 	@Override
 	public Survey modifySurvey(Survey survey) {
@@ -150,6 +153,15 @@ public class SurveyServiceImpl implements SurveyService {
 		}
 		sDao.closeCurrentSessionwithTransaction();
 		return filtered;
+	}
+
+	@Override
+	public Survey addPartnerToSurvey(int idPartner, int idSurvey) {
+		PartnerSite partner = pss.findById(idPartner);
+		SurveyInternet survey = (SurveyInternet) this.findById(idSurvey);
+		survey.getLsPartnerSite().add(partner);
+		survey = (SurveyInternet) this.modifySurvey(survey);
+		return survey;
 	}
 
 }

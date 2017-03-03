@@ -66,8 +66,7 @@ public class Criteria implements Comparable<Criteria> {
 
 	@Override
 	public String toString() {
-		return "Criteria [id=" + id + ", quota=" + quota + ", department=" + department + ", fact=" + fact + ", survey="
-				+ survey + "]";
+		return "Criteria [id=" + id + ", quota=" + quota + ", department=" + department + ", fact=" + fact + "]";
 	}
 
 	@Override

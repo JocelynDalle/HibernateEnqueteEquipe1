@@ -22,6 +22,10 @@
 </head>
 <body>
 	<div class="container">
+		<ol class="breadcrumb">
+			<li><a href="index">Enquêtes</a></li>
+			<li class="active">Sites partenaires</li>
+		</ol>
 		<h3>${survey.name}</h3>
 		<h4>
 			<p>
@@ -32,23 +36,25 @@
 				</c:forEach>
 			</p>
 			<p>
-			<label for="#drop">Ajouter un site partenaire à cette
+				<label for="#drop">Ajouter un site partenaire à cette
 					enquête :</label>
-			<form action="PartnerSiteServlet" method="post" class="form-inline">
-				 <select name="idPartner">
+			<form action="AddPartnerServlet" method="post" class="form-inline">
+				<select class="form-control" name="idPartner">
 					<c:forEach var="partner" items="${partners}">
-						<option value="${partner.id}"><span class="label label-info">${partner.name}</span>
-							${partner.url}
-						</option>
+						<option value="${partner.id}">${partner.name}:
+							${partner.url}</option>
 					</c:forEach>
 				</select>
-				<button type="submit" name="idSurvey" value="${survey.id}" class="btn btn-default">
-					Ajouter
-				</button>
+				<button type="submit" name="idSurvey" value="${survey.id}"
+					class="btn btn-default">Ajouter</button>
+				<button type="button" class="btn btn-primary" data-toggle="modal"
+					data-target="#modal-addPartner${survey.id}" data-whatever="@mdo">Créer
+					un nouveau site partenaire</button>
 			</form>
 			</p>
 		</h4>
-		<div class="modal fade modal-addPartner${survey.id} text-left"
+
+		<div class="modal fade text-left" id="modal-addPartner${survey.id}"
 			tabindex="-1" role="dialog"
 			aria-labelledby="addPartnerSmallModalLabel${survey.id}">
 			<div class="modal-dialog" role="document">
@@ -73,8 +79,8 @@
 									class="form-control"
 									placeholder="Entrez l'url du site partenaire" required>
 								<br>
-								<button type="submit" name="idSurvey"
-									value="${survey.id} class="btnbtn-default">Ajouter</button>
+								<button type="submit" name="idSurvey" value="${survey.id}"
+									class="btnbtn-default">Ajouter</button>
 							</div>
 						</form>
 					</div>
@@ -87,6 +93,7 @@
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
+
 	</div>
 </body>
 </html>

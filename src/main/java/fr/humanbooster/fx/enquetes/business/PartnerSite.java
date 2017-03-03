@@ -54,6 +54,11 @@ public class PartnerSite implements Comparable<PartnerSite> {
 		}
 		return this.getId() > o.getId() ? 1 : -1;
 	}
+
+	@Override
+	public String toString() {
+		return "PartnerSite [id=" + id + ", name=" + name + ", url=" + url + "]";
+	}
 	
 	
 }

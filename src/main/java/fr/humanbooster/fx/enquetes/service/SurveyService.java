@@ -23,4 +23,6 @@ public interface SurveyService {
 	
 	public Set<Survey> filterSurveys(String name, Date start, Date end);
 	
+	public Survey addPartnerToSurvey(int idPartner, int idSurvey);
+	
 }

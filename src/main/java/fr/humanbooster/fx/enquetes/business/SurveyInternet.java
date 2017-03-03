@@ -36,6 +36,14 @@ public class SurveyInternet extends Survey {
 	public void setLsPartnerSite(Set<PartnerSite> lsPartnerSite) {
 		this.lsPartnerSite = lsPartnerSite;
 	}
+	
+
+	@Override
+	public String toString() {
+		return "SurveyInternet [lsPartnerSite=" + lsPartnerSite + ", id=" + id + ", name=" + name + ", price=" + price
+				+ ", date=" + date + ", formatDate=" + formatDate + ", setCriteria=" + setCriteria + ", lsQuestion="
+				+ lsQuestion + "]";
+	}
 
 	@Override
 	public int compareTo(Survey o) {

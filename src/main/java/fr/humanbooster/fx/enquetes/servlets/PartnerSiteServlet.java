@@ -8,9 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.humanbooster.fx.enquetes.business.PartnerSite;
-import fr.humanbooster.fx.enquetes.business.Survey;
 import fr.humanbooster.fx.enquetes.business.SurveyInternet;
 import fr.humanbooster.fx.enquetes.service.PartenerSiteService;
 import fr.humanbooster.fx.enquetes.service.SurveyService;
@@ -71,12 +71,25 @@ public class PartnerSiteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String idSurveyStr = request.getParameter("idSurvey");
+		String idPartnerStr = request.getParameter("idPartner");
 		int idSurvey = 0;
-//		PartnerSite partner = pss.findById(idPartner);
+		int idPartner = 0;
+		
 		if (idSurveyStr != null) {
-			idSurvey = Integer.parseInt(idSurveyStr);
-			request.setAttribute("idSurvey", idSurvey);
-			request.getRequestDispatcher("modifieSitesPartenaires.jsp").forward(request, response);;
+			if(idPartnerStr != null) {
+				try {
+					idPartner = Integer.parseInt(idPartnerStr);
+					idSurvey = Integer.parseInt(idSurveyStr);
+					System.out.println(ss.addPartnerToSurvey(idPartner, idSurvey));
+					request.setAttribute("idSurvey", idSurvey);
+					doGet(request, response);
+				} catch (NumberFormatException e) {
+					System.out.println("Erreur de parsing : idPartner = '" + idPartnerStr + ", idSurvey = '" + idSurvey + "'");
+					e.printStackTrace();
+					response.sendRedirect("index");
+				}
+			}
+			
 		} else {
 			response.sendRedirect("index");
 		}
