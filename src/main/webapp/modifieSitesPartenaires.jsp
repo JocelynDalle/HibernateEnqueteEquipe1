@@ -27,32 +27,40 @@
 			<li class="active">Sites partenaires</li>
 		</ol>
 		<h3>${survey.name}</h3>
-		<h4>
+
+		<h5>
+			<br>
 			<p>
-				<label>Sites partenaires :</label>
-				<c:forEach var="partner" items="${survey.lsPartnerSite}">
-					<a href="${partner.url}"><button type="button"
-							class="btn btn-warning">${partner.name}</button></a>
-				</c:forEach>
-			</p>
-			<p>
-				<label for="#drop">Ajouter un site partenaire à cette
-					enquête :</label>
-			<form action="AddPartnerServlet" method="post" class="form-inline">
-				<select class="form-control" name="idPartner">
-					<c:forEach var="partner" items="${partners}">
-						<option value="${partner.id}">${partner.name}:
-							${partner.url}</option>
+				<label>Sites partenaires associés à cette enquête :</label>
+			<form>
+				<fieldset class="">
+					<c:forEach var="partner" items="${survey.lsPartnerSite}">
+						<a href="${partner.url}"><button type="button"
+								class="btn btn-warning">${partner.name}</button></a>
 					</c:forEach>
-				</select>
-				<button type="submit" name="idSurvey" value="${survey.id}"
-					class="btn btn-default">Ajouter</button>
+				</fieldset>
+			</form>
+			</p>
+			<br>
+			<p>
+				<label for="#drop">Ajouter un site partenaire :</label>
+			<form action="AddPartnerServlet" method="post" class="form-inline">
+				<c:if test="${partners != null}">
+					<select class="form-control" name="idPartner">
+						<c:forEach var="partner" items="${partners}">
+							<option value="${partner.id}">${partner.name}:
+								${partner.url}</option>
+						</c:forEach>
+					</select>
+					<button type="submit" name="idSurvey" value="${survey.id}"
+						class="btn btn-default">Ajouter</button>
+				</c:if>
 				<button type="button" class="btn btn-primary" data-toggle="modal"
 					data-target="#modal-addPartner${survey.id}" data-whatever="@mdo">Créer
 					un nouveau site partenaire</button>
 			</form>
 			</p>
-		</h4>
+		</h5>
 
 		<div class="modal fade text-left" id="modal-addPartner${survey.id}"
 			tabindex="-1" role="dialog"

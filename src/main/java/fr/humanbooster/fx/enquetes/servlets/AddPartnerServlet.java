@@ -2,13 +2,13 @@ package fr.humanbooster.fx.enquetes.servlets;
 
 import java.io.IOException;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import fr.humanbooster.fx.enquetes.business.PartnerSite;
 import fr.humanbooster.fx.enquetes.business.SurveyInternet;
@@ -57,7 +57,9 @@ public class AddPartnerServlet extends HttpServlet {
 			System.out.println("idSurvey : " + idSurvey);
 			SurveyInternet survey = (SurveyInternet) ss.findById(idSurvey);
 			Set<PartnerSite> surveyPartners = survey.getLsPartnerSite();
-			partners.removeAll(surveyPartners);
+			if(!partners.removeAll(surveyPartners)) {
+				partners = null;
+			}
 			request.setAttribute("partners", partners);
 			request.setAttribute("survey", survey);
 			request.getRequestDispatcher("modifieSitesPartenaires.jsp").forward(request, response);
