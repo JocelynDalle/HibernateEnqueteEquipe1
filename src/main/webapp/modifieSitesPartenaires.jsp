@@ -32,15 +32,65 @@
 			<br>
 			<p>
 				<label>Sites partenaires associés à cette enquête :</label>
-			<form>
-				<fieldset class="">
+			<table class="table table-condensed">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nom</th>
+						<th>Adresse</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
 					<c:forEach var="partner" items="${survey.lsPartnerSite}">
-						<a href="${partner.url}"><button type="button"
-								class="btn btn-warning">${partner.name}</button></a>
+					
+						<tr>
+							<td>${partner.id}</td>
+							<td><a href="${partner.url}"><span class="label label-success">${partner.name}</span></a></td>
+							<td><a href="${partner.url}">${partner.url}</a></td>
+							<td><button type="button" class="btn btn-xs btn-default"
+									data-toggle="modal"
+									data-target=".modal-delete-partner${partner.id}">
+									<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+								</button></td>
+						</tr>
+						
+						<div class="modal fade modal-delete-partner${partner.id} text-left"
+							tabindex="-1" role="dialog"
+							aria-labelledby="mySmallModalLabel${partner.id}">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										<h4 class="modal-title">${survey.name}</h4>
+									</div>
+									<div class="modal-body">
+										<p>Voulez-vous vraiment supprimer <span class="label label-success">${partner.name}</span> de cette enquête?</p>
+									</div>
+									<div class="modal-footer">
+										<form action="#" method="post">
+											<button type="submit" class="btn btn-default"
+												name="typeAction" value="delete">Supprimer</button>
+											<input type="hidden" name="idSurvey" value="${survey.id}">
+											<button type="button" class="btn btn-primary"
+												data-dismiss="modal">Annuler</button>
+										</form>
+									</div>
+								</div>
+								<!-- /.modal-content -->
+							</div>
+							<!-- /.modal-dialog -->
+						</div>
+						<!-- /.modal -->
+						
 					</c:forEach>
-				</fieldset>
-			</form>
+				</tbody>
+			</table>
 			</p>
+
 			<br>
 			<p>
 				<label for="#drop">Ajouter un site partenaire :</label>
@@ -48,7 +98,7 @@
 				<c:if test="${partners != null}">
 					<select class="form-control" name="idPartner">
 						<c:forEach var="partner" items="${partners}">
-							<option value="${partner.id}">${partner.name}:
+							<option value="${partner.id}">${partner.name}&nbsp;:
 								${partner.url}</option>
 						</c:forEach>
 					</select>
@@ -75,7 +125,7 @@
 						<h4 class="modal-title">Créer un nouveau site partenaire</h4>
 					</div>
 					<div class="modal-body">
-						<form action="AddPartnerServlet" method="post">
+						<form id="newPS" action="AddPartnerServlet" method="post">
 							<input type="hidden" name="fromModifiePartnerSite" value="1">
 							<div class="form-group">
 								<label>Nom : </label><input type="text" name="name"
@@ -87,12 +137,12 @@
 									class="form-control"
 									placeholder="Entrez l'url du site partenaire" required>
 								<br>
-								<button type="submit" name="idSurvey" value="${survey.id}"
-									class="btnbtn-default">Ajouter</button>
 							</div>
 						</form>
 					</div>
 					<div class="modal-footer">
+						<button form="newPS" type="submit" name="idSurvey"
+							value="${survey.id}" class="btn btn-default">Créer</button>
 						<button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
 					</div>
 				</div>

@@ -53,7 +53,7 @@
 			</p>
 		</nav>
 
-		<h1 id="top">Liste des Enquetes</h1>
+		<h1 class="text-center" id="top">Liste des Enquetes</h1>
 
 		<c:if test="${newQ != null ? newQ == 1 ? true : false : false}">
 			<a id="gotoSurvey" href="#survey${idSurvey}"></a>
@@ -71,19 +71,18 @@
 				<div class="form-group">
 					<label for="debut"><span
 						class="glyphicon glyphicon-calendar" aria-hidden="true"></span>Début</label>
-					<input id="debut" type="date" name="startDate" class="form-control"
+					<input id="debut" type="text" name="startDate" class="form-control"
 						placeholder="jj/mm/aaaa">
 				</div>
 				<div class="form-group">
 					<label for="fin"><span class="glyphicon glyphicon-calendar"
-						aria-hidden="true"></span>Fin</label> <input id="fin" type="date"
+						aria-hidden="true"></span>Fin</label> <input id="fin" type="text"
 						name="endDate" class="form-control" placeholder="jj/mm/aaaa">
 					<button type="submit" class="btn btn-info">Filtrer</button>
 				</div>
 
 			</form>
 		</h5>
-
 		<h4 class="text-center">
 			<c:if test="${nameFilter != null || nameFilter.equals('')}">
 				<strong>Nom :</strong>
@@ -102,7 +101,6 @@
 				<span class="label label-info">${endDate}</span>
 			</c:if>
 		</h4>
-
 		<div class="row">
 			<div class="col-md-2 col-sm-1 col-xs-0"></div>
 			<div class="col-md-8 col-sm-10 col-xs-12">
@@ -165,7 +163,7 @@
 									<form action="SurveysServlet" method="post">
 										<div class="btn-group" role="group"">
 											<button type="submit" name="typeAction" value="update"
-												class="btn btn-success">
+												class="btn btn-warning">
 												<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 											</button>
 											<input type="hidden" name="typeSurvey"
@@ -195,15 +193,18 @@
 							<c:if test="${survey.getClass().simpleName eq 'SurveyInternet'}">
 								<h4 class="partner">
 									<label>Sites partenaires :</label>
-									<c:forEach var="partner" items="${survey.lsPartnerSite}">
-										<a href="${partner.url}"><button type="button"
-												class="btn btn-warning">${partner.name}</button></a>
-									</c:forEach>
-									<a href="AddPartnerServlet?idSurvey=${survey.id}">
-										<button type="button" class="btn btn-primary" name="idSurvey">
-											<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-										</button>
-									</a>
+									<div class="well text-center">
+										<c:forEach var="partner" items="${survey.lsPartnerSite}">
+											<a href="${partner.url}"><button type="button"
+													class="btn btn-success">${partner.name}</button></a>
+										</c:forEach>
+
+										<a href="AddPartnerServlet?idSurvey=${survey.id}">
+											<button type="button" class="btn btn-primary" name="idSurvey">
+												<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+											</button>
+										</a>
+									</div>
 								</h4>
 								<div class="modal fade modal-addPartner${survey.id} text-left"
 									tabindex="-1" role="dialog"
@@ -286,10 +287,12 @@
 						</div>
 					</div>
 				</c:forEach>
-				<br> <br> <br> <br>
 			</div>
 			<div class="col-md-2 col-sm-1 col-xs-0"></div>
 		</div>
+		<footer>
+			<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+		</footer>
 	</div>
 </body>
 </html>

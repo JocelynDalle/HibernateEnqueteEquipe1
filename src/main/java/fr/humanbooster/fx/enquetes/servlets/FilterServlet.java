@@ -53,6 +53,8 @@ public class FilterServlet extends HttpServlet {
 		Date startDate = null;
 		Date endDate = null;
 		try {
+			System.out.println(startDateStr);
+			System.out.println(endDateStr);
 			startDate = sdf.parse(startDateStr);
 			request.setAttribute("startDate", DateFormat.getDateInstance( DateFormat.MEDIUM ).format(startDate));
 		} catch (ParseException e) {
