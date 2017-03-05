@@ -1,6 +1,7 @@
 package fr.humanbooster.fx.enquetes.service.impl;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -41,7 +42,7 @@ public class SurveyServiceImpl implements SurveyService {
 		qDao.openCurrentSessionWithTransaction();
 		cDao.openCurrentSessionWithTransaction();
 		Survey survey = sDao.findById(idSurvey);
-		Set<Question> questions;
+		List<Question> questions;
 		Set<Criteria> criterias;
 		if (survey != null) {
 			questions = survey.getLsQuestion();
@@ -161,6 +162,22 @@ public class SurveyServiceImpl implements SurveyService {
 		SurveyInternet survey = (SurveyInternet) this.findById(idSurvey);
 		survey.getLsPartnerSite().add(partner);
 		survey = (SurveyInternet) this.modifySurvey(survey);
+		return survey;
+	}
+
+	@Override
+	public Survey deletePartnerFromSurvey(int idPartner, int idSurvey) {
+		sDao.openCurrentSessionWithTransaction();
+		SurveyInternet survey = (SurveyInternet) this.findById(idSurvey);
+		PartnerSite partner = pss.findById(idPartner);
+		if(survey != null) {
+			Set<PartnerSite> partners = survey.getLsPartnerSite();
+			if(partners != null && partner != null) {
+				System.out.println("remove partner " + partner.getId() + ":" + partners.remove(partner));
+				survey.setLsPartnerSite(partners);
+				System.out.println("Survey modifié=" + modifySurvey(survey));
+			}
+		}
 		return survey;
 	}
 

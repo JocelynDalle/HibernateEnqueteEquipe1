@@ -31,29 +31,40 @@
 <body
 	onload="${newQ != null ? newQ == 1 ? 'expandQuestions()' : '' : ''}">
 	<div class="container">
-
-		<nav class="navbar navbar-survey navbar-default navbar-fixed-bottom">
-			<div class="navbar-header">
-				<p class="navbar-text">Nombre total d'enquête(s):
-					${surveys.size()}</p>
+		<nav class="navbar navbar-survey navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<span class="brand">SurveyMaker</span>
+				</div>
+				<div class="navbar-left">
+					<p class="navbar-text">Nombre total d'enquête(s):
+						${surveys.size()}</p>
+				</div>
+				<p class="navbar-right">
+					<a href="SurveyServlet?typeAction=create&typeSurvey=surveyPhone">
+						<button type="submit" class="btn btn-primary navbar-btn">
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+							Enquête <span class="glyphicon glyphicon-earphone"
+								aria-hidden="true"></span>
+						</button>
+					</a> <a
+						href="SurveyServlet?typeAction=create&typeSurvey=surveyInternet">
+						<button type="submit" class="btn btn-primary navbar-btn">
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+							Enquête <span class="glyphicon glyphicon-phone"
+								aria-hidden="true"></span>
+						</button>
+					</a> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				</p>
 			</div>
-			<p class="navbar-right">
-				<a href="SurveyServlet?typeAction=create&typeSurvey=surveyPhone">
-					<button type="submit" class="btn btn-primary navbar-btn">
-						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-						Enquête <span class="glyphicon glyphicon-earphone"
-							aria-hidden="true"></span>
-					</button>
-				</a> <a href="SurveyServlet?typeAction=create&typeSurvey=surveyInternet">
-					<button type="submit" class="btn btn-primary navbar-btn">
-						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-						Enquête <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
-					</button>
-				</a> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-			</p>
 		</nav>
 
-		<h1 class="text-center" id="top">Liste des Enquetes</h1>
+		<header>
+			<br> <br> <br> <br>
+		</header>
+		<ol class="breadcrumb">
+			<li><a href="index">Liste des enquêtes</a></li>
+		</ol>
 
 		<c:if test="${newQ != null ? newQ == 1 ? true : false : false}">
 			<a id="gotoSurvey" href="#survey${idSurvey}"></a>
@@ -102,8 +113,8 @@
 			</c:if>
 		</h4>
 		<div class="row">
-			<div class="col-md-2 col-sm-1 col-xs-0"></div>
-			<div class="col-md-8 col-sm-10 col-xs-12">
+			
+			<div class="col-md-12 col-sm-12 col-xs-12">
 				<c:forEach var="survey" items="${surveys}">
 					<div class="modal fade modal-delete-survey${survey.id} text-left"
 						tabindex="-1" role="dialog"
@@ -162,6 +173,12 @@
 								<div class="col-md-4 text-right">
 									<form action="SurveysServlet" method="post">
 										<div class="btn-group" role="group"">
+											<button class="btn btn-default" type="button"
+												data-container="body" data-toggle="popover"
+												data-placement="top"
+												data-content="${survey.setCriteria.toString()}">
+												Critères <span class="badge">${survey.setCriteria.size()}</span>
+											</button>
 											<button type="submit" name="typeAction" value="update"
 												class="btn btn-warning">
 												<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
@@ -195,7 +212,7 @@
 									<label>Sites partenaires :</label>
 									<div class="well text-center">
 										<c:forEach var="partner" items="${survey.lsPartnerSite}">
-											<a href="${partner.url}"><button type="button"
+											<a href="${partner.url}" target="blank"><button type="button"
 													class="btn btn-success">${partner.name}</button></a>
 										</c:forEach>
 
@@ -268,15 +285,16 @@
 										aria-expanded="${newQ != null ? newQ == 1 ? idSurvey != null ? idSurvey != survey.id ? 'false' : 'true' : 'true' : 'true' : 'true' }"
 										aria-labelledby="heading${survey.id}">
 										<div class="list-group">
-											<a href="QuestionAddServlet?idSurvey=${survey.id}"
-												class="list-group-item list-group-item-info text-center">Ajouter
-												une question</a>
 											<c:forEach var="question" items="${survey.lsQuestion}">
 												<a
 													href="QuestionUpdateServlet?idSurvey=${survey.id}&idQuestion=${question.id}"
-													class="list-group-item ${newQ != null ? newQ == 1 ? idNewQ != null ? question.id == idNewQ ? 'active' : '' : '' : '' : ''}">${question.wording}
+													class="list-group-item ${newQ != null ? newQ == 1 ? idNewQ != null ? question.id == idNewQ ? 'active' : '' : '' : '' : ''}">Question
+													n°&nbsp;${survey.lsQuestion.indexOf(question) + 1}&nbsp;:&nbsp;${question.wording}
 												</a>
 											</c:forEach>
+											<a href="QuestionAddServlet?idSurvey=${survey.id}"
+												class="list-group-item list-group-item-info text-center">Ajouter
+												une question</a>
 										</div>
 									</div>
 								</div>
@@ -288,10 +306,14 @@
 					</div>
 				</c:forEach>
 			</div>
-			<div class="col-md-2 col-sm-1 col-xs-0"></div>
+			
 		</div>
 		<footer>
-			<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+			<br> <br> <br> <br> <br> <br> <br>
+			<br> <br> <br> <br> <br> <br> <br>
+			<br> <br> <br> <br> <br> <br> <br>
+			<br> <br> <br> <br> <br> <br> <br>
+			<br> <br>
 		</footer>
 	</div>
 </body>

@@ -7,21 +7,57 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
 <script src="js/jquery-3.1.1.min.js">
 	
 </script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>
+<script src="js/bootstrap.min.js">
+	
+</script>
+<script src="js/npm.js">
+	
+</script>
 <title>Ajouter une question</title>
 </head>
 <body>
-	<div class="container-fluid">
+	<div class="container">
+		<nav class="navbar navbar-survey navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<span class="brand">SurveyMaker</span>
+				</div>
+				<c:if test="${surveys != null}">
+					<div class="navbar-left">
+						<p class="navbar-text">Nombre total d'enquête(s):
+							${surveys.size()}</p>
+					</div>
+				</c:if>
+				<p class="navbar-right">
+					<a href="SurveyServlet?typeAction=create&typeSurvey=surveyPhone">
+						<button type="submit" class="btn btn-primary navbar-btn">
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+							Enquête <span class="glyphicon glyphicon-earphone"
+								aria-hidden="true"></span>
+						</button>
+					</a> <a
+						href="SurveyServlet?typeAction=create&typeSurvey=surveyInternet">
+						<button type="submit" class="btn btn-primary navbar-btn">
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+							Enquête <span class="glyphicon glyphicon-phone"
+								aria-hidden="true"></span>
+						</button>
+					</a> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				</p>
+			</div>
+		</nav>
+		<header>
+			<br> <br> <br> <br>
+		</header>
+		<ol class="breadcrumb">
+			<li><a href="index">Liste des enquêtes</a></li>
+			<li class="active">Modifier question</li>
+		</ol>
 		<h1>Nouvelle question</h1>
 		<h3>Pour l'enquête ${survey.name}</h3>
 		<form action="QuestionAddServlet" method="post">
@@ -29,9 +65,16 @@
 				de la question</label> <br> <input type="text" autofocus
 				placeholder="Votre Question ici" class="form-control" rows="3"
 				name="wording" required />
-			<button type="submit">Ajouter</button>
+			<button type="submit" class="btn btn-default">Ajouter</button>
 
 		</form>
+		<footer>
+			<br> <br> <br> <br> <br> <br> <br>
+			<br> <br> <br> <br> <br> <br> <br>
+			<br> <br> <br> <br> <br> <br> <br>
+			<br> <br> <br> <br> <br> <br> <br>
+			<br> <br> <br> <br> <br> <br> <br>
+		</footer>
 	</div>
 </body>
 </html>

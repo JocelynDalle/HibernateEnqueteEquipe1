@@ -57,7 +57,12 @@ public class PartnerSiteServlet extends HttpServlet {
 			System.out.println("idSurvey : " + idSurvey);
 			SurveyInternet survey = (SurveyInternet) ss.findById(idSurvey);
 			Set<PartnerSite> surveyPartners = survey.getLsPartnerSite();
-			partners.removeAll(surveyPartners);
+			for(PartnerSite p : surveyPartners) {
+				System.out.println("partner site :" + p);
+			}
+			if(!surveyPartners.isEmpty()) {
+				partners.removeAll(surveyPartners);
+			}
 			request.setAttribute("partners", partners);
 			request.setAttribute("survey", survey);
 			request.getRequestDispatcher("modifieSitesPartenaires.jsp").forward(request, response);

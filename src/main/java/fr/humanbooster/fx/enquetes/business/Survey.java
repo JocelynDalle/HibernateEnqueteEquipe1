@@ -1,7 +1,9 @@
 package fr.humanbooster.fx.enquetes.business;
 
 import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -34,7 +36,7 @@ public abstract class Survey implements Comparable<Survey> {
 	protected Set<Criteria> setCriteria;
 
 	@OneToMany(mappedBy="survey", fetch=FetchType.EAGER)
-	protected Set<Question> lsQuestion;
+	protected List<Question> lsQuestion;
 	
 	public int getId() {
 		return id;
@@ -76,11 +78,11 @@ public abstract class Survey implements Comparable<Survey> {
 		this.setCriteria = setCriteria;
 	}
 
-	public Set<Question> getLsQuestion() {
+	public List<Question> getLsQuestion() {
 		return lsQuestion;
 	}
 
-	public void setLsQuestion(Set<Question> lsQuestion) {
+	public void setLsQuestion(List<Question> lsQuestion) {
 		this.lsQuestion = lsQuestion;
 	}
 
@@ -91,6 +93,11 @@ public abstract class Survey implements Comparable<Survey> {
 	}
 
 	public String getFormatDate() {
+		if(date == null) {
+			Calendar cal = Calendar.getInstance();
+			Date d = cal.getTime();
+			return DateFormat.getDateInstance( DateFormat.MEDIUM ).format(d);
+		}
 		return DateFormat.getDateInstance( DateFormat.MEDIUM ).format(date);
 	}
 

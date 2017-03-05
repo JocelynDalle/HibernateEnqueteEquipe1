@@ -1,14 +1,16 @@
 package fr.humanbooster.fx.enquetes.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
 
 import fr.humanbooster.fx.enquetes.business.PartnerSite;
 import fr.humanbooster.fx.enquetes.business.SurveyInternet;
@@ -57,8 +59,10 @@ public class AddPartnerServlet extends HttpServlet {
 			System.out.println("idSurvey : " + idSurvey);
 			SurveyInternet survey = (SurveyInternet) ss.findById(idSurvey);
 			Set<PartnerSite> surveyPartners = survey.getLsPartnerSite();
-			if(!partners.removeAll(surveyPartners)) {
-				partners = null;
+			if(!surveyPartners.isEmpty()) {
+				if (!partners.removeAll(surveyPartners)) {
+					partners = null;
+				}
 			}
 			request.setAttribute("partners", partners);
 			request.setAttribute("survey", survey);
@@ -76,25 +80,40 @@ public class AddPartnerServlet extends HttpServlet {
 		String url = request.getParameter("url");
 		String idSurveyStr = request.getParameter("idSurvey");
 		String idPartnerStr = request.getParameter("idPartner");
+		String typeAction = request.getParameter("typeAction");
 		int idSurvey = 0;
 		int idPartner = 0;
 		PartnerSite partnerSite = null;
 		if (idSurveyStr != null) {
 			if (name != null && url != null) {
-				partnerSite = pss.create(name, url);
-				System.out.println("PartnerSite créé : " + partnerSite);
+				try {
+					partnerSite = pss.create(name, url);
+					System.out.println("PartnerSite créé : " + partnerSite);
+				} catch (org.hibernate.exception.ConstraintViolationException e) {
+					Throwable error = e.getCause();
+					String message = error.getLocalizedMessage();
+					request.setAttribute("message", message);
+					e.printStackTrace();
+				}
 			}
 			idSurvey = Integer.parseInt(idSurveyStr);
 			if (idPartnerStr != null) {
 				try {
 					idPartner = Integer.parseInt(idPartnerStr);
-					System.out.println(ss.addPartnerToSurvey(idPartner, idSurvey));
+
 				} catch (NumberFormatException e) {
 					System.out.println(
 							"Erreur de parsing : idPartner = '" + idPartnerStr + ", idSurvey = '" + idSurvey + "'");
 					e.printStackTrace();
 					response.sendRedirect("index");
 					return;
+				}
+				if (typeAction != null) {
+					if (typeAction.equals("delete")) {
+						System.out.println("delete " + idPartner + " from " + idSurvey + " : " + ss.deletePartnerFromSurvey(idPartner, idSurvey));
+					} else if (typeAction.equals("add")) {
+						System.out.println(ss.addPartnerToSurvey(idPartner, idSurvey));
+					}
 				}
 			}
 			request.setAttribute("idSurvey", idSurvey);

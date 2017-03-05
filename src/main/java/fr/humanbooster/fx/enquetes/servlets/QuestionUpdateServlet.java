@@ -65,6 +65,7 @@ public class QuestionUpdateServlet extends HttpServlet {
 		String idQuestion = request.getParameter("idQuestion");
 		String idSurvey = request.getParameter("idSurvey");
 		String type = request.getParameter("typeAction");
+		System.out.println("update question : " + idQuestion + " " + type + " " + idSurvey);
 		if (type != null && idQuestion != null && idSurvey != null) {
 			switch (type) {
 			case "update":
