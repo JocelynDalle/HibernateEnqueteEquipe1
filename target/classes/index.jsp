@@ -9,6 +9,19 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+
 <script src="js/jquery-3.1.1.min.js">
 	
 </script>
@@ -18,6 +31,10 @@
 <script src="js/npm.js">
 	
 </script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
 <c:if test="${newQ != null ? newQ == 1 ? true : false : false}">
 	<script>
 		function expandQuestions() {
@@ -41,14 +58,14 @@
 						${surveys.size()}</p>
 				</div>
 				<p class="navbar-right">
-					<a href="SurveyServlet?typeAction=create&typeSurvey=surveyPhone">
+					<a href="addSurvey?typeAction=create&typeSurvey=surveyPhone">
 						<button type="submit" class="btn btn-primary navbar-btn">
 							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 							Enquête <span class="glyphicon glyphicon-earphone"
 								aria-hidden="true"></span>
 						</button>
 					</a> <a
-						href="SurveyServlet?typeAction=create&typeSurvey=surveyInternet">
+						href="addSurvey?typeAction=create&typeSurvey=surveyInternet">
 						<button type="submit" class="btn btn-primary navbar-btn">
 							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 							Enquête <span class="glyphicon glyphicon-phone"
@@ -113,7 +130,7 @@
 			</c:if>
 		</h4>
 		<div class="row">
-			
+
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<c:forEach var="survey" items="${surveys}">
 					<div class="modal fade modal-delete-survey${survey.id} text-left"
@@ -132,7 +149,7 @@
 									<p>Voulez-vous vraiment supprimer ${survey.name}?</p>
 								</div>
 								<div class="modal-footer">
-									<form action="SurveysServlet" method="post">
+									<form action="index" method="post">
 										<button type="submit" class="btn btn-default"
 											name="typeAction" value="delete">Supprimer</button>
 										<input type="hidden" name="idSurvey" value="${survey.id}">
@@ -171,7 +188,7 @@
 									<em>Plannifi&eacute;e le:</em> <strong>${survey.formatDate}</strong>
 								</div>
 								<div class="col-md-4 text-right">
-									<form action="SurveysServlet" method="post">
+									<form action="index" method="post">
 										<div class="btn-group" role="group"">
 											<button class="btn btn-default" type="button"
 												data-container="body" data-toggle="popover"
@@ -212,8 +229,8 @@
 									<label>Sites partenaires :</label>
 									<div class="well text-center">
 										<c:forEach var="partner" items="${survey.lsPartnerSite}">
-											<a href="${partner.url}" target="blank"><button type="button"
-													class="btn btn-success">${partner.name}</button></a>
+											<a href="${partner.url}" target="blank"><button
+													type="button" class="btn btn-success">${partner.name}</button></a>
 										</c:forEach>
 
 										<a href="AddPartnerServlet?idSurvey=${survey.id}">
@@ -306,7 +323,7 @@
 					</div>
 				</c:forEach>
 			</div>
-			
+
 		</div>
 		<footer>
 			<br> <br> <br> <br> <br> <br> <br>

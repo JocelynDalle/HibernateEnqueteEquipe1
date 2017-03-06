@@ -18,12 +18,4 @@ public interface CriteriaDao {
 
 	public Set<Criteria> findAll();
 
-	public Session openCurrentSession();
-
-	public Session openCurrentSessionWithTransaction();
-
-	public void closeCurrentSession();
-
-	public void closeCurrentSessionwithTransaction();
-
 }

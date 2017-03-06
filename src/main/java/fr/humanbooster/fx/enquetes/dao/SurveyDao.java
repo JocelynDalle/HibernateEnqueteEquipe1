@@ -16,14 +16,6 @@ public interface SurveyDao {
 
 	public Survey findById(int idSurvey);
 
-	public void closeCurrentSessionwithTransaction();
-
-	public void closeCurrentSession();
-
-	public Session openCurrentSessionWithTransaction();
-
-	public Session openCurrentSession();
-
 	public Set<Survey> findAll();
 
 }

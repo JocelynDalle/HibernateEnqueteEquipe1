@@ -21,12 +21,4 @@ public interface PartnerSiteDao {
 
 	public Set<PartnerSite> findAll();
 
-	public Session openCurrentSession();
-
-	public Session openCurrentSessionWithTransaction();
-
-	public void closeCurrentSession();
-
-	public void closeCurrentSessionwithTransaction();
-
 }

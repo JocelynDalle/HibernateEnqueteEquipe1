@@ -1,5 +1,7 @@
 package fr.humanbooster.fx.enquetes.business;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 
 @Entity
@@ -23,6 +25,23 @@ public class SurveyPhone extends Survey {
 		super.setId(id);
 		super.setName(name);
 		super.setPrice(price);
+		this.script = script;
+	}	
+	
+	public SurveyPhone(String name, float price, String script, Date date) {
+		super();
+		super.setName(name);
+		super.setPrice(price);
+		super.setDate(date);
+		this.script = script;
+	}	
+	
+	public SurveyPhone(int id, String name, float price, String script, Date date) {
+		super();
+		super.setId(id);
+		super.setName(name);
+		super.setPrice(price);
+		super.setDate(date);
 		this.script = script;
 	}	
 

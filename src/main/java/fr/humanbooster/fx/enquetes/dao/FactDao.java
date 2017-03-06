@@ -18,12 +18,4 @@ public interface FactDao {
 
 	public Set<Fact> findAll();
 
-	public Session openCurrentSession();
-
-	public Session openCurrentSessionWithTransaction();
-
-	public void closeCurrentSession();
-
-	public void closeCurrentSessionwithTransaction();
-
 }

@@ -18,12 +18,4 @@ public interface DepartmentDao {
 
 	public Set<Department> findAll();
 
-	public Session openCurrentSession();
-
-	public Session openCurrentSessionWithTransaction();
-
-	public void closeCurrentSession();
-
-	public  closeCurrentSessionwithTransaction();
-
 }

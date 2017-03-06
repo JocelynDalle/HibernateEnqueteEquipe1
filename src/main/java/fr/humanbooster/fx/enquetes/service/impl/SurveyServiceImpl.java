@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import fr.humanbooster.fx.enquetes.business.Criteria;
 import fr.humanbooster.fx.enquetes.business.PartnerSite;
 import fr.humanbooster.fx.enquetes.business.Question;
@@ -14,33 +18,30 @@ import fr.humanbooster.fx.enquetes.business.SurveyPhone;
 import fr.humanbooster.fx.enquetes.dao.CriteriaDao;
 import fr.humanbooster.fx.enquetes.dao.QuestionDao;
 import fr.humanbooster.fx.enquetes.dao.SurveyDao;
-import fr.humanbooster.fx.enquetes.dao.impl.CriteriaDaoImpl;
-import fr.humanbooster.fx.enquetes.dao.impl.QuestionDaoImpl;
-import fr.humanbooster.fx.enquetes.dao.impl.SurveyDaoImpl;
 import fr.humanbooster.fx.enquetes.service.PartenerSiteService;
 import fr.humanbooster.fx.enquetes.service.SurveyService;
 
+@Service
+@Transactional
 public class SurveyServiceImpl implements SurveyService {
 
-	private SurveyDao sDao = new SurveyDaoImpl();
-	private QuestionDao qDao = new QuestionDaoImpl();
-	private CriteriaDao cDao = new CriteriaDaoImpl();
-	private PartenerSiteService pss = new PartenerSiteServiceImpl();
+	@Autowired
+	private SurveyDao sDao;
+	@Autowired
+	private QuestionDao qDao;
+	@Autowired
+	private CriteriaDao cDao;
+	@Autowired
+	private PartenerSiteService pss;
 
 	@Override
 	public Survey modifySurvey(Survey survey) {
-		sDao.openCurrentSessionWithTransaction();
-		Survey s = sDao.updateSurvey(survey);
-		sDao.closeCurrentSessionwithTransaction();
-		return s;
+		return sDao.updateSurvey(survey);
 	}
 
 	@Override
 	public Boolean deleteSurvey(int idSurvey) {
 		Boolean result = false;
-		sDao.openCurrentSessionWithTransaction();
-		qDao.openCurrentSessionWithTransaction();
-		cDao.openCurrentSessionWithTransaction();
 		Survey survey = sDao.findById(idSurvey);
 		List<Question> questions;
 		Set<Criteria> criterias;
@@ -55,47 +56,35 @@ public class SurveyServiceImpl implements SurveyService {
 			}
 			result = sDao.deleteSurvey(idSurvey);
 		}
-		cDao.closeCurrentSessionwithTransaction();
-		qDao.closeCurrentSessionwithTransaction();
-		sDao.closeCurrentSessionwithTransaction();
 		return result;
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public Set<Survey> findAllSurvey() {
-		sDao.openCurrentSessionWithTransaction();
 		Set<Survey> s = sDao.findAll();
-		sDao.closeCurrentSessionwithTransaction();
 		return s;
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public Survey findById(int idSurvey) {
-		sDao.openCurrentSessionWithTransaction();
-		Survey survey = sDao.findById(idSurvey);
-		sDao.closeCurrentSessionwithTransaction();
-		return survey;
+		return sDao.findById(idSurvey);
 	}
 
 	@Override
 	public SurveyInternet createSurveyInternet(SurveyInternet surveyInternet) {
-		sDao.openCurrentSessionWithTransaction();
-		SurveyInternet _surveyInternet = (SurveyInternet) sDao.createSurvey(surveyInternet);
-		sDao.closeCurrentSessionwithTransaction();
-		return _surveyInternet;
+		return (SurveyInternet) sDao.createSurvey(surveyInternet);
 	}
 
 	@Override
 	public SurveyPhone createSurveyPhone(SurveyPhone surveyPhone) {
-		sDao.openCurrentSessionWithTransaction();
-		SurveyPhone _surveyPhone = (SurveyPhone) sDao.createSurvey(surveyPhone);
-		sDao.closeCurrentSessionwithTransaction();
-		return _surveyPhone;
+		return (SurveyPhone) sDao.createSurvey(surveyPhone);
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public Set<Survey> filterSurveys(String name, Date start, Date end) {
-		sDao.openCurrentSessionWithTransaction();
 		Set<Survey> filtered = new TreeSet<>();
 		Set<Survey> surveys = sDao.findAll();
 		for (Survey survey : surveys) {
@@ -152,7 +141,6 @@ public class SurveyServiceImpl implements SurveyService {
 				}
 			}
 		}
-		sDao.closeCurrentSessionwithTransaction();
 		return filtered;
 	}
 
@@ -167,7 +155,6 @@ public class SurveyServiceImpl implements SurveyService {
 
 	@Override
 	public Survey deletePartnerFromSurvey(int idPartner, int idSurvey) {
-		sDao.openCurrentSessionWithTransaction();
 		SurveyInternet survey = (SurveyInternet) this.findById(idSurvey);
 		PartnerSite partner = pss.findById(idPartner);
 		if(survey != null) {

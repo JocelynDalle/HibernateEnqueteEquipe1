@@ -34,14 +34,14 @@
 					</div>
 				</c:if>
 				<p class="navbar-right">
-					<a href="SurveyServlet?typeAction=create&typeSurvey=surveyPhone">
+					<a href="addSurvey?typeAction=create&typeSurvey=surveyPhone">
 						<button type="submit" class="btn btn-primary navbar-btn">
 							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 							Enquête <span class="glyphicon glyphicon-earphone"
 								aria-hidden="true"></span>
 						</button>
 					</a> <a
-						href="SurveyServlet?typeAction=create&typeSurvey=surveyInternet">
+						href="addSurvey?typeAction=create&typeSurvey=surveyInternet">
 						<button type="submit" class="btn btn-primary navbar-btn">
 							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 							Enquête <span class="glyphicon glyphicon-phone"
@@ -62,16 +62,15 @@
 		<!-- début code -->
 
 		<h1>Enquête</h1>
-		<form method="POST" action="SurveyServlet">
+		<form method="POST" action="addSurvey">
 			<input type=hidden name="id" value="${survey.id}"> <label>Nom
 				: <input type="text" name="name"
 				placeholder="Entrez le nom de l'enquête" value="${survey.name}"
 				required class="form-control">
-			</label><br> <label> Prix : <input type="text" name="price">
-				<input type="number" name="price"
+			</label><br> <label> Prix : <input type="text" name="price"
 				placeholder="Entrez le prix de l'enquête" value="${survey.price}"
 				required class="form-control">
-			</label><br> <label> Date : <input type="date" name="date"
+			</label><br> <label> Date : <input type="text" name="date"
 				value="${survey.date}" required class="form-control">
 			</label><br>
 			<c:if test="${typeSurvey eq 'surveyPhone'}">

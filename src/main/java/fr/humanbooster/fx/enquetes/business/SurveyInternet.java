@@ -1,5 +1,6 @@
 package fr.humanbooster.fx.enquetes.business;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -29,6 +30,14 @@ public class SurveyInternet extends Survey {
 		super.setPrice(price);
 	}	
 
+	public SurveyInternet(int id, String name, float price, Date date) {
+		super();
+		super.setId(id);
+		super.setName(name);
+		super.setPrice(price);
+		super.setDate(date);
+	}	
+	
 	public Set<PartnerSite> getLsPartnerSite() {
 		return lsPartnerSite;
 	}

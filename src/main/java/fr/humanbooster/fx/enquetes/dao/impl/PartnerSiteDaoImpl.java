@@ -6,19 +6,21 @@ import java.util.TreeSet;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import fr.humanbooster.fx.enquetes.business.PartnerSite;
 import fr.humanbooster.fx.enquetes.dao.PartnerSiteDao;
 
+@Repository
 public class PartnerSiteDaoImpl implements PartnerSiteDao {
 
-	private Session session;
-	private Transaction transaction;
+	@Autowired
+	private SessionFactory sf;
 
 	// Create
 	/* (non-Javadoc)
@@ -26,7 +28,7 @@ public class PartnerSiteDaoImpl implements PartnerSiteDao {
 	 */
 	@Override
 	public PartnerSite createPartnerSite(PartnerSite partnerSite) {
-		session.save(partnerSite);
+		sf.getCurrentSession().save(partnerSite);
 		return partnerSite;
 	}
 
@@ -36,7 +38,7 @@ public class PartnerSiteDaoImpl implements PartnerSiteDao {
 	 */
 	@Override
 	public PartnerSite updatePartnerSite(PartnerSite partnerSite) {
-		session.saveOrUpdate(partnerSite);
+		sf.getCurrentSession().saveOrUpdate(partnerSite);
 		return partnerSite;
 	}
 
@@ -49,7 +51,7 @@ public class PartnerSiteDaoImpl implements PartnerSiteDao {
 		PartnerSite partnerSite = this.findById(idPartnerSite);
 		if (partnerSite == null)
 			return false;
-		session.delete(partnerSite);
+		sf.getCurrentSession().delete(partnerSite);
 		return true;
 	}
 
@@ -59,7 +61,7 @@ public class PartnerSiteDaoImpl implements PartnerSiteDao {
 	@Override
 	public PartnerSite findById(int idPartnerSite) {
 
-		return session.byId(PartnerSite.class).load(idPartnerSite);
+		return sf.getCurrentSession().byId(PartnerSite.class).load(idPartnerSite);
 	}
 
 	/* (non-Javadoc)
@@ -68,63 +70,10 @@ public class PartnerSiteDaoImpl implements PartnerSiteDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public Set<PartnerSite> findAll() {
-		List<PartnerSite> lsPartnerSite = session.createQuery("from PartnerSite").getResultList();
+		List<PartnerSite> lsPartnerSite = sf.getCurrentSession().createQuery("from PartnerSite").getResultList();
 		Set<PartnerSite> setPartnerSite = new TreeSet<PartnerSite>();
 		setPartnerSite.addAll(lsPartnerSite);
 		return setPartnerSite;
-
-	}
-
-	/* (non-Javadoc)
-	 * @see fr.humanbooster.fx.enquetes.dao.impl.PartnerSiteDao#openCurrentSession()
-	 */
-	@Override
-
-	public Session openCurrentSession() {
-		session = getSessionFactory().openSession();
-		return session;
-
-	}
-
-	/* (non-Javadoc)
-	 * @see fr.humanbooster.fx.enquetes.dao.impl.PartnerSiteDao#openCurrentSessionWithTransaction()
-	 */
-	@Override
-
-	public Session openCurrentSessionWithTransaction() {
-		session = getSessionFactory().openSession();
-		transaction = session.beginTransaction();
-		return session;
-	}
-
-	/* (non-Javadoc)
-	 * @see fr.humanbooster.fx.enquetes.dao.impl.PartnerSiteDao#closeCurrentSession()
-	 */
-	@Override
-
-	public void closeCurrentSession() {
-		session.close();
-	}
-
-	/* (non-Javadoc)
-	 * @see fr.humanbooster.fx.enquetes.dao.impl.PartnerSiteDao#closeCurrentSessionwithTransaction()
-	 */
-	@Override
-
-	public void closeCurrentSessionwithTransaction() {
-		transaction.commit();
-		session.close();
-
-	}
-
-	private SessionFactory getSessionFactory() {
-
-		StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder().configure("/hibernate.cfg.xml")
-				.build();
-		Metadata metadata = new MetadataSources(standardRegistry).getMetadataBuilder().build();
-		SessionFactory sessionFactory = metadata.getSessionFactoryBuilder().build();
-
-		return sessionFactory;
 
 	}
 

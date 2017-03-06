@@ -19,12 +19,4 @@ public interface QuestionDao {
 
 	public List<Question> findAll();
 
-	public Session openCurrentSession();
-
-	public Session openCurrentSessionWithTransaction();
-
-	public void closeCurrentSession();
-
-	public void closeCurrentSessionwithTransaction();
-
 }
