@@ -68,7 +68,7 @@
 				placeholder="Entrez le nom de l'enquête" value="${survey.name}"
 				required class="form-control">
 			</label><br> <label> Prix : <input type="text" name="price"
-				placeholder="Entrez le prix de l'enquête" value="${survey.price}"
+				<input type="number" name="price" placeholder="Entrez le prix de l'enquête" value="${survey.price}" required>
 				required class="form-control">
 			</label><br> <label> Date : <input type="date" name="date"
 				value="${survey.date}" required class="form-control">
