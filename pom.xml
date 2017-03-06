@@ -7,7 +7,8 @@
 	<packaging>war</packaging>
 
 	<properties>
-		<hibernate.version>5.2.7.Final</hibernate.version>
+		<spring.version>4.3.7.RELEASE</spring.version>
+		<hibernate.version>5.2.8.Final</hibernate.version>
 		<jstl.version>1.2</jstl.version>
 		<mysql.connector.version>5.1.39</mysql.connector.version>
 	</properties>
@@ -30,7 +31,7 @@
 	</repositories>
 
 	<build>
-		<finalName>EnquetesHibernate</finalName>
+		<finalName>EnquetesSpring</finalName>
 		<testSourceDirectory>src/main/test</testSourceDirectory>
 		<resources>
 			<resource>
@@ -59,6 +60,60 @@
 	</build>
 
 	<dependencies>
+	
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>4.3.3.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate-core</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -106,6 +161,11 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>2.0.0</version>
 		</dependency>
 	</dependencies>
 </project>

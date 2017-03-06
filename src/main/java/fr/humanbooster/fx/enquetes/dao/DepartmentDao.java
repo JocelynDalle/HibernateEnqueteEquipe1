@@ -8,9 +8,9 @@ import fr.humanbooster.fx.enquetes.business.Department;
 
 public interface DepartmentDao {
 
-	Department createDepartment(Department department);
+	public Department createDepartment(Department department);
 
-	Department updateDepartment(Department department);
+	public Department updateDepartment(Department department);
 
 	boolean deleteDepartment(int idDepartment);
 

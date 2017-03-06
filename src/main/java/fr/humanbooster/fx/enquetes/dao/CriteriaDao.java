@@ -8,22 +8,22 @@ import fr.humanbooster.fx.enquetes.business.Criteria;
 
 public interface CriteriaDao {
 
-	Criteria createCriteria(Criteria criteria);
+	public Criteria createCriteria(Criteria criteria);
 
-	Criteria updateCriteria(Criteria criteria);
+	public Criteria updateCriteria(Criteria criteria);
 
-	boolean deleteCriteria(int idCriteria);
+	public boolean deleteCriteria(int idCriteria);
 
-	Criteria findById(int idCriteria);
+	public Criteria findById(int idCriteria);
 
-	Set<Criteria> findAll();
+	public Set<Criteria> findAll();
 
-	Session openCurrentSession();
+	public Session openCurrentSession();
 
-	Session openCurrentSessionWithTransaction();
+	public Session openCurrentSessionWithTransaction();
 
-	void closeCurrentSession();
+	public void closeCurrentSession();
 
-	void closeCurrentSessionwithTransaction();
+	public void closeCurrentSessionwithTransaction();
 
 }
