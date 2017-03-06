@@ -1,5 +1,6 @@
 package fr.humanbooster.fx.enquetes.dao;
 
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Session;
@@ -8,22 +9,22 @@ import fr.humanbooster.fx.enquetes.business.Question;
 
 public interface QuestionDao {
 
-	Question createQuestion(Question question);
+	public Question createQuestion(Question question);
 
-	Question updateQuestion(Question question);
+	public Question updateQuestion(Question question);
 
-	boolean deleteQuestion(int idQuestion);
+	public boolean deleteQuestion(int idQuestion);
 
-	Question findById(int idQuestion);
+	public Question findById(int idQuestion);
 
-	Set<Question> findAll();
+	public List<Question> findAll();
 
-	Session openCurrentSession();
+	public Session openCurrentSession();
 
-	Session openCurrentSessionWithTransaction();
+	public Session openCurrentSessionWithTransaction();
 
-	void closeCurrentSession();
+	public void closeCurrentSession();
 
-	void closeCurrentSessionwithTransaction();
+	public void closeCurrentSessionwithTransaction();
 
 }

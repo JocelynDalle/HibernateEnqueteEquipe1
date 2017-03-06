@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.humanbooster.fx.enquetes.business.Question;
 import fr.humanbooster.fx.enquetes.business.Survey;
@@ -23,7 +24,7 @@ import fr.humanbooster.fx.enquetes.service.impl.SurveyServiceImpl;
 @WebServlet("/QuestionUpdateServlet")
 public class QuestionUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	private SurveyService ss = new SurveyServiceImpl();
 	private QuestionService qs = new QuestionServiceImpl();
 
@@ -62,9 +63,28 @@ public class QuestionUpdateServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		String idQuestion = request.getParameter("idQuestion");
+		String idSurvey = request.getParameter("idSurvey");
+		String type = request.getParameter("typeAction");
+		System.out.println("update question : " + idQuestion + " " + type + " " + idSurvey);
+		if (type != null && idQuestion != null && idSurvey != null) {
+			switch (type) {
+			case "update":
+				String wording = request.getParameter("wording");
+				qs.modifyQuestion(idQuestion, wording);
+				HttpSession session = request.getSession(true);
+				session.setAttribute("newQ", 1);
+				session.setAttribute("idNewQ", idQuestion);
+				session.setAttribute("idSurvey", idSurvey);
+				break;
+			case "delete":
+				qs.deleteQuestion(idQuestion);
+				break;
+			default:
+				System.out.println("Problème : ni update ni delete");
+				break;
+			}
+		}
 		System.out.println(idQuestion);
-		String wording = request.getParameter("wording");
-		qs.modifyQuestion(idQuestion, wording);
 		response.sendRedirect("index");
 	}
 

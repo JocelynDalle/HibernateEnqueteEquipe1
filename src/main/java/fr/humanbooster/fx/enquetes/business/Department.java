@@ -61,7 +61,7 @@ public class Department implements Comparable<Department> {
 
 	@Override
 	public String toString() {
-		return "Department [id=" + id + ", number=" + number + ", name=" + name + ", lsCriteria=" + lsCriteria + "]";
+		return "Department [id=" + id + ", number=" + number + ", name=" + name + "]";
 	}
 
 	@Override

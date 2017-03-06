@@ -19,4 +19,27 @@ public class PartenerSiteServiceImpl implements PartenerSiteService{
 		return p;
 	}
 
+	@Override
+	public PartnerSite create(String name, String url) {
+		pDao.openCurrentSessionWithTransaction();
+		PartnerSite partnerSite = new PartnerSite();
+		if(name != null) {
+			partnerSite.setName(name);
+		}
+		if(url != null) {
+			partnerSite.setUrl(url);
+		}
+		partnerSite = pDao.createPartnerSite(partnerSite);
+		pDao.closeCurrentSessionwithTransaction();
+		return partnerSite;
+	}
+
+	@Override
+	public PartnerSite findById(int idPartnerSite) {
+		pDao.openCurrentSessionWithTransaction();
+		PartnerSite partnerSite = pDao.findById(idPartnerSite);
+		pDao.closeCurrentSessionwithTransaction();
+		return partnerSite;
+	}
+
 }

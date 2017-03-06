@@ -1,7 +1,7 @@
 package fr.humanbooster.fx.enquetes.servlets;
 
 import java.io.IOException;
-import java.util.Iterator;
+import java.text.SimpleDateFormat;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.humanbooster.fx.enquetes.business.Survey;
 import fr.humanbooster.fx.enquetes.service.QuestionService;
@@ -40,7 +41,38 @@ public class SurveysServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
+		Object objQ = session.getAttribute("newQ");
+		Object objS = session.getAttribute("newS");
+		Object objIdS = session.getAttribute("idSurvey");
+		int newQ = -1;
+		int newS = -1;
+		String idSurvey = "";
+		String idNewQ = "";
+		if(objQ != null && objIdS != null) {
+			newQ = (Integer)objQ;
+			if(newQ == 1) {
+				request.setAttribute("newQ", 1);
+				idNewQ = String.valueOf(session.getAttribute("idNewQ"));
+				idSurvey = (String)session.getAttribute("idSurvey");
+				request.setAttribute("idNewQ", idNewQ);
+				request.setAttribute("idSurvey", idSurvey);
+				session.setAttribute("newQ", 0);
+				System.out.println("idSurvey = " + idSurvey);
+			}
+		}
+		if(objS != null) {
+			newS = (Integer)objS;
+			if(newS == 1) {
+				request.setAttribute("newS", 1);
+				int idNewS = Integer.valueOf((String)session.getAttribute("idNewS"));
+				request.setAttribute("idNewS", idNewS);
+				session.setAttribute("newS", 0);
+			}
+		}
 		response.setCharacterEncoding("UTF-8");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		request.setAttribute("sdf", sdf);
 		Set<Survey> surveys = ss.findAllSurvey();
 		request.setAttribute("surveys", surveys);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -55,12 +87,15 @@ public class SurveysServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		String typeAction = request.getParameter("typeAction");
 		String typeSurvey = request.getParameter("typeSurvey");
-		int idSurvey = Integer.valueOf(request.getParameter("idSurvey"));
+		int idSurvey = -1;
+		if(request.getParameter("idSurvey") != null) {
+			idSurvey = Integer.valueOf(request.getParameter("idSurvey"));
+		}
 		if (typeAction != null && typeSurvey != null) {
 			if (typeAction.equals("update")) {
 				request.setAttribute("typeAction", typeAction);
 				request.setAttribute("typeSurvey", typeSurvey);
-				request.setAttribute("idSurvey", idSurvey);
+				request.setAttribute("survey", ss.findById(idSurvey));
 				request.getRequestDispatcher("survey.jsp").forward(request, response);
 			} else if (typeAction.equals("delete")) {
 				boolean deleted = ss.deleteSurvey(idSurvey);

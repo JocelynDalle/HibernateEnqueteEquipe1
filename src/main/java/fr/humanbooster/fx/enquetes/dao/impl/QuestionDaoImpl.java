@@ -1,8 +1,6 @@
 package fr.humanbooster.fx.enquetes.dao.impl;
 
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -52,11 +50,11 @@ public class QuestionDaoImpl implements QuestionDao {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public Set<Question> findAll() {
+	public List<Question> findAll() {
 		List<Question> lsQuestion = session.createQuery("from Question").getResultList();
-		Set<Question> setQuestion = new TreeSet<Question>();
-		setQuestion.addAll(lsQuestion);
-		return setQuestion;
+//		Set<Question> setQuestion = new TreeSet<Question>();
+//		setQuestion.addAll(lsQuestion);
+		return lsQuestion;
 
 	}
 

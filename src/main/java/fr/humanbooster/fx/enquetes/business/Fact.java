@@ -38,7 +38,7 @@ public class Fact implements Comparable<Fact> {
 	
 	@Override
 	public String toString() {
-		return "Fact [id=" + id + ", wording=" + wording + ", lsCriteria=" + lsCriteria + "]";
+		return "Fact [id=" + id + ", wording=" + wording + "]";
 	}
 	
 	@Override
