@@ -9,24 +9,24 @@ import fr.humanbooster.fx.enquetes.business.PartnerSite;
 public interface PartnerSiteDao {
 
 	// Create
-	PartnerSite createPartnerSite(PartnerSite partnerSite);
+	public PartnerSite createPartnerSite(PartnerSite partnerSite);
 
 	// Update
-	PartnerSite updatePartnerSite(PartnerSite partnerSite);
+	public PartnerSite updatePartnerSite(PartnerSite partnerSite);
 
 	// Delete
-	boolean deletePartnerSite(int idPartnerSite);
+	public boolean deletePartnerSite(int idPartnerSite);
 
-	PartnerSite findById(int idPartnerSite);
+	public PartnerSite findById(int idPartnerSite);
 
-	Set<PartnerSite> findAll();
+	public Set<PartnerSite> findAll();
 
-	Session openCurrentSession();
+	public Session openCurrentSession();
 
-	Session openCurrentSessionWithTransaction();
+	public Session openCurrentSessionWithTransaction();
 
-	void closeCurrentSession();
+	public void closeCurrentSession();
 
-	void closeCurrentSessionwithTransaction();
+	public void closeCurrentSessionwithTransaction();
 
 }

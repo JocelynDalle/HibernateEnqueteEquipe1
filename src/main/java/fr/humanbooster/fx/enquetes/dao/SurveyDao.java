@@ -8,22 +8,22 @@ import fr.humanbooster.fx.enquetes.business.Survey;
 
 public interface SurveyDao {
 
-	Survey createSurvey(Survey survey);
+	public Survey createSurvey(Survey survey);
 
-	Survey updateSurvey(Survey survey);
+	public Survey updateSurvey(Survey survey);
 
-	boolean deleteSurvey(int idSurvey);
+	public boolean deleteSurvey(int idSurvey);
 
-	Survey findById(int idSurvey);
+	public Survey findById(int idSurvey);
 
-	void closeCurrentSessionwithTransaction();
+	public void closeCurrentSessionwithTransaction();
 
-	void closeCurrentSession();
+	public void closeCurrentSession();
 
-	Session openCurrentSessionWithTransaction();
+	public Session openCurrentSessionWithTransaction();
 
-	Session openCurrentSession();
+	public Session openCurrentSession();
 
-	Set<Survey> findAll();
+	public Set<Survey> findAll();
 
 }

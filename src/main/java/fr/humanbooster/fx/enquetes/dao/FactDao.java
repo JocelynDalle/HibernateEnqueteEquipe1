@@ -8,22 +8,22 @@ import fr.humanbooster.fx.enquetes.business.Fact;
 
 public interface FactDao {
 
-	Fact createFact(Fact fact);
+	public Fact createFact(Fact fact);
 
-	Fact updateFact(Fact fact);
+	public Fact updateFact(Fact fact);
 
-	boolean deleteFact(int idFact);
+	public boolean deleteFact(int idFact);
 
-	Fact findById(int idFact);
+	public Fact findById(int idFact);
 
-	Set<Fact> findAll();
+	public Set<Fact> findAll();
 
-	Session openCurrentSession();
+	public Session openCurrentSession();
 
-	Session openCurrentSessionWithTransaction();
+	public Session openCurrentSessionWithTransaction();
 
-	void closeCurrentSession();
+	public void closeCurrentSession();
 
-	void closeCurrentSessionwithTransaction();
+	public void closeCurrentSessionwithTransaction();
 
 }

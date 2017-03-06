@@ -12,18 +12,18 @@ public interface DepartmentDao {
 
 	public Department updateDepartment(Department department);
 
-	boolean deleteDepartment(int idDepartment);
+	public boolean deleteDepartment(int idDepartment);
 
-	Department findById(int idDepartment);
+	public Department findById(int idDepartment);
 
-	Set<Department> findAll();
+	public Set<Department> findAll();
 
-	Session openCurrentSession();
+	public Session openCurrentSession();
 
-	Session openCurrentSessionWithTransaction();
+	public Session openCurrentSessionWithTransaction();
 
-	void closeCurrentSession();
+	public void closeCurrentSession();
 
-	void closeCurrentSessionwithTransaction();
+	public  closeCurrentSessionwithTransaction();
 
 }
