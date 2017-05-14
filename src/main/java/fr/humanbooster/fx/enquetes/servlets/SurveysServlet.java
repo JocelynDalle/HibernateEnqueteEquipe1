@@ -11,9 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.humanbooster.fx.enquetes.business.PartnerSite;
 import fr.humanbooster.fx.enquetes.business.Survey;
+import fr.humanbooster.fx.enquetes.service.PartenerSiteService;
 import fr.humanbooster.fx.enquetes.service.QuestionService;
 import fr.humanbooster.fx.enquetes.service.SurveyService;
+import fr.humanbooster.fx.enquetes.service.impl.PartenerSiteServiceImpl;
 import fr.humanbooster.fx.enquetes.service.impl.QuestionServiceImpl;
 import fr.humanbooster.fx.enquetes.service.impl.SurveyServiceImpl;
 
@@ -26,6 +29,7 @@ public class SurveysServlet extends HttpServlet {
 
 	private SurveyService ss = new SurveyServiceImpl();
 	private QuestionService qs = new QuestionServiceImpl();
+	private PartenerSiteService pss = new PartenerSiteServiceImpl();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -87,6 +91,11 @@ public class SurveysServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		String typeAction = request.getParameter("typeAction");
 		String typeSurvey = request.getParameter("typeSurvey");
+		Set<PartnerSite> partners = pss.findAll();
+		for(PartnerSite p : partners) {
+			System.err.println("partner : " + p.getId() + " " + p.getName() + " " + p.getUrl());
+		}
+		request.setAttribute("partners", partners);
 		int idSurvey = -1;
 		if(request.getParameter("idSurvey") != null) {
 			idSurvey = Integer.valueOf(request.getParameter("idSurvey"));

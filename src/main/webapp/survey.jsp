@@ -58,7 +58,7 @@
 			<li><a href="index">Liste des enquêtes</a></li>
 			<li class="active">Enquête</li>
 		</ol>
-		
+
 		<!-- début code -->
 
 		<h1>Enquête</h1>
@@ -67,11 +67,11 @@
 				: <input type="text" name="name"
 				placeholder="Entrez le nom de l'enquête" value="${survey.name}"
 				required class="form-control">
-			</label><br> <label> Prix : <input type="text" name="price"
-				<input type="number" name="price" placeholder="Entrez le prix de l'enquête" value="${survey.price}" required>
-				required class="form-control">
+			</label><br> <label> Prix : <input type="number" name="price"
+				class="form-control" placeholder="Entrez le prix de l'enquête"
+				value="${survey.price}" required>
 			</label><br> <label> Date : <input type="date" name="date"
-				value="${survey.date}" required class="form-control">
+				value="${survey.formatDate}" required class="form-control">
 			</label><br>
 			<c:if test="${typeSurvey eq 'surveyPhone'}">
 				<label>Script :<br> <textarea name="script" rows="4"
@@ -82,7 +82,10 @@
 			<c:if test="${typeSurvey eq 'surveyInternet'}">
 				<label>Sites partenaires : <select name="idsPartnerSite"
 					class="form-control">
-						<option>heho</option>
+						<c:forEach var="partner" items="${partners}">
+							<option value="${partner.id}">${partner.name}</option>
+						</c:forEach>
+
 				</select>
 				</label>
 			</c:if>
