@@ -12,10 +12,19 @@
         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
         http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<mvc:annotation-driven />
 
+	<mvc:resources mapping="/resources/**" location="/resources/"
+		cache-period="31556926" />
+		
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/" />
@@ -23,11 +32,11 @@
 	</bean>
 
 	<context:component-scan base-package="fr.humanbooster.fx.enquetes" />
-	
+
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="fr.humanbooster.fx.enquetes.business"/>
+		<property name="packagesToScan" value="fr.humanbooster.fx.enquetes.business" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
@@ -42,8 +51,7 @@
 
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 
-		<property name="url"
-			value="jdbc:mysql://localhost:3306/surveyg1" />
+		<property name="url" value="jdbc:mysql://localhost:3306/surveyg1" />
 		<property name="username" value="root" />
 
 		<!-- Configuration pool -->

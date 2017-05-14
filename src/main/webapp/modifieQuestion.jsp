@@ -2,20 +2,23 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/style.css">
-<script src="js/jquery-3.1.1.min.js">
+<link rel="stylesheet" href="<c:url value="resources/css/bootstrap.min.css"/>">
+<link rel="stylesheet" href="<c:url value="resources/css/style.css"/>">
+
+<script src="<c:url value="resources/js/jquery-3.1.1.min.js"/>">
 	
 </script>
-<script src="js/bootstrap.min.js">
+<script src="<c:url value="resources/js/bootstrap.min.js"/>">
 	
 </script>
-<script src="js/npm.js">
+<script src="<c:url value="resources/js/npm.js"/>">
 	
 </script>
 <title>Modifier une question</title>
